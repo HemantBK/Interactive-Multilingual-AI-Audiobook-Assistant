@@ -65,14 +65,12 @@ The assistant narrates content, supports **multilingual translation in 10 langua
          └────────┬─────────┘
                   │
               Audio Player
-yaml
-Copy code
+
 
 ---
 
 ## 📦 Installation
 
-```bash
 git clone https://github.com/YOUR_USERNAME/interactive-audiobook-ai.git
 cd interactive-audiobook-ai
 
@@ -83,8 +81,7 @@ pip install -r requirements.txt
 ▶️ Usage
 Run the app:
 
-bash
-Copy code
+
 streamlit run app.py
 Then:
 
