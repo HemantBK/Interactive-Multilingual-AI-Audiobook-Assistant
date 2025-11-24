@@ -36,8 +36,6 @@ The assistant narrates content, supports **multilingual translation in 10 langua
 
 ## 🧩 System Architecture
 
-mathematica
-Copy code
       ┌──────────────────────┐
       │     User Upload      │
       └───────────┬──────────┘
