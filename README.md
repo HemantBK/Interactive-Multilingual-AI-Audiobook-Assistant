@@ -1,129 +1,132 @@
-# 🎧 Interactive Multilingual AI Audiobook Assistant
+# Interactive Multilingual AI Audiobook Assistant
 
-An AI-powered system that converts any document (PDF, scanned image, or text) into an **interactive audiobook**.  
-The assistant narrates content, supports **multilingual translation in 10 languages**, and enables **real-time question answering** using a Retrieval-Augmented Generation (RAG) memory system.
+Convert scanned or digital documents into an interactive audiobook experience with OCR extraction, neural text-to-speech narration, multilingual translation, and real-time question answering using a Retrieval-Augmented Generation (RAG) system.
 
----
+## Features
 
-## 🚀 Key Features
+- **Document Processing**: Supports PDF, scanned pages, and image-based documents
+- **Intelligent Text Extraction**: Automatic OCR fallback if direct text extraction fails
+- **Multilingual Support**: Narration and translation in 10 languages
+- **Interactive Q&A**: RAG-based question answering during playback
+- **Real-time Control**: Pause, query, and resume audio seamlessly
+- **Optimized Performance**: ONNX Runtime and model quantization for faster inference
 
-- 📄 Supports PDFs, scanned documents, and images  
-- 🔍 Automatic OCR fallback when text extraction fails  
-- 🧠 RAG-based contextual memory for question answering  
-- 🌍 Multilingual translation and narration (10 languages)  
-- 🎤 Neural TTS for natural-sounding voice output  
-- ⚡ Optimized inference using ONNX and model quantization  
-- 🎙 Interactive voice loop: **Play → Pause → Ask → Resume**
+## System Architecture
 
----
+```
+User Upload
+    ↓
+OCR / Text Extraction
+    ↓
+Text Cleaning and Chunking
+    ↓
+Embeddings + Vector Store (FAISS / ChromaDB)
+    ↓
+Retrieval and LLM Reasoning (RAG)
+    ↓
+Optional Translation Layer
+    ↓
+Neural Text-to-Speech
+    ↓
+Interactive Audio Playback
+```
 
-## 🛠 Tech Stack
+## Tech Stack
 
-| Category | Technologies |
-|----------|-------------|
-| Language | Python |
-| OCR | Tesseract, EasyOCR |
-| NLP | spaCy, NLTK |
-| Embeddings | Sentence Transformers, OpenAI Embeddings |
-| Vector Store | FAISS or ChromaDB |
-| LLM Middleware | LangChain |
-| Text-to-Speech | Edge-TTS or OpenAI TTS |
-| Optimization | ONNX Runtime + INT8 quantization |
-| Backend | FastAPI |
-| UI | Streamlit |
+| Component | Tools |
+|-----------|-------|
+| **Programming Language** | Python |
+| **OCR** | Tesseract, EasyOCR |
+| **NLP** | spaCy, NLTK |
+| **Embeddings** | Sentence Transformers, OpenAI Embeddings |
+| **Vector Database** | FAISS or ChromaDB |
+| **LLM Integration** | LangChain |
+| **Text-to-Speech** | Edge-TTS or OpenAI TTS |
+| **Optimization** | ONNX Runtime, INT8 Quantization |
+| **UI Layer** | Streamlit |
+| **Backend** | FastAPI |
 
----
+## Installation
 
-## 🧩 System Architecture
-
-      ┌──────────────────────┐
-      │     User Upload      │
-      └───────────┬──────────┘
-                  │
-          ┌───────▼─────────┐
-          │ OCR / Extraction │
-          └───────┬─────────┘
-                  │
-      ┌───────────▼───────────┐
-      │ Text Cleaning/Chunking │
-      └───────────┬───────────┘
-                  │
-         ┌────────▼─────────┐
-         │ Vector DB (RAG)  │
-         └────────┬─────────┘
-                  │
-          ┌───────▼─────────┐
-          │ LLM Reasoning    │
-          └───────┬─────────┘
-                  │
-         ┌────────▼─────────┐
-         │ Translation (Optional) │
-         └────────┬─────────┘
-                  │
-         ┌────────▼─────────┐
-         │ Neural Speech (TTS) │
-         └────────┬─────────┘
-                  │
-              Audio Player
-
-
----
-
-## 📦 Installation
-
+```bash
+# Clone the repository
 git clone https://github.com/YOUR_USERNAME/interactive-audiobook-ai.git
 cd interactive-audiobook-ai
 
+# Create virtual environment
 python -m venv venv
-source venv/bin/activate     # Windows: venv\Scripts\activate
+source venv/bin/activate    # Windows: venv\Scripts\activate
 
+# Install dependencies
 pip install -r requirements.txt
-▶️ Usage
-Run the app:
+```
 
+## Usage
 
+```bash
 streamlit run app.py
-Then:
+```
 
-Upload a document
+### Steps:
+1. Upload a document (PDF, image, or scanned page)
+2. Select your preferred language
+3. Generate audiobook
+4. Listen and ask questions during playback
 
-Choose output language
+## Performance Summary
 
-Press "Generate Audiobook"
+| Metric | Result |
+|--------|--------|
+| **OCR Accuracy** | 95% |
+| **Retrieval Accuracy** | 92% |
+| **Inference Latency** (After Optimization) | < 1.5 seconds |
+| **Supported Output Languages** | 10 |
 
-Listen — and ask questions anytime
+## Future Improvements
 
-📈 Performance Benchmarks
-Metric	Result
-OCR Extraction Accuracy	95 percent
-Retrieval Accuracy (RAG)	92 percent
-Inference Latency	Under 1.5 seconds after ONNX optimization
-Supported Languages	10
+- [ ] Offline ASR and lightweight LLM support
+- [ ] Mobile and embedded deployment
+- [ ] Custom narrator voice cloning
+- [ ] GPU/NPU optimized on-device inference
+- [ ] Real-time streaming capabilities
+- [ ] Multi-document cross-referencing
 
-🧪 Future Enhancements
-Offline mode with lightweight LLM and Whisper ASR
+## Use Cases
 
-Voice cloning customization
+- **Accessibility**: Assistive reading for visually impaired users
+- **Education**: Academic and research document navigation
+- **Language Learning**: Multi-language comprehension and practice
+- **Content Creation**: Intelligent audiobook generation
+- **Professional**: Document review and analysis
 
-Mobile and embedded deployment
+## Contributing
 
-GPU/NPU accelerated pipelines
+Contributions are welcome! Please open an issue before submitting major changes.
 
-📚 Use Cases
-Accessibility and assistive reading
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Educational and research reading
+## License
 
-Multilingual audiobook creation
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Knowledge assistants for long documents
+## Acknowledgements
 
-🤝 Contributing
-Contributions are welcome.
-Please open an issue for major feature proposals.
+This work integrates open-source NLP, OCR, speech synthesis, and retrieval technologies to create a unified interactive reading experience. Special thanks to the communities behind:
 
-📜 License
-MIT License
+- Tesseract OCR and EasyOCR
+- Sentence Transformers and LangChain
+- FAISS and ChromaDB
+- Edge-TTS and OpenAI
+- Streamlit and FastAPI
 
-⭐ Support
-If you find this useful, please ⭐ star the repository to support the project.
+## Contact
+
+For questions or suggestions, please open an issue or reach out via email: hemantkumar.bk@gmail.com
+
+---
+
+**Star ⭐ this repository if you find it useful!**
