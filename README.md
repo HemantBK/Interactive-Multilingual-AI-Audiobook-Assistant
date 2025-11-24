@@ -50,8 +50,8 @@ Interactive Audio Playback
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/interactive-audiobook-ai.git
-cd interactive-audiobook-ai
+git clone https://github.com/HemantBK/Interactive-Multilingual-AI-Audiobook-Assistant.git
+cd Interactive-Multilingual-AI-Audiobook-Assistant
 
 # Create virtual environment
 python -m venv venv
