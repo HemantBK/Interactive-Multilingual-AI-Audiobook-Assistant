@@ -129,4 +129,3 @@ For questions or suggestions, please open an issue or reach out via email: heman
 
 ---
 
-**Star ⭐ this repository if you find it useful!**
