@@ -1,0 +1,7 @@
+{
+  "name": "Welcome to ARIA",
+  "description": "Convert documents into interactive audiobooks with AI-powered narration, translation, and RAG-based Q&A.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

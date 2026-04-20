@@ -1,0 +1,28 @@
+# ARIA Backend — Python dependencies
+# Pin minor versions; only upgrade via PRs that run the eval suite.
+
+# --- Web framework ---
+fastapi==0.115.4
+uvicorn[standard]==0.32.0
+python-multipart==0.0.17
+
+# --- Validation + settings ---
+pydantic==2.9.2
+pydantic-settings==2.6.1
+
+# --- HTTP client ---
+httpx==0.27.2
+
+# --- Structured logging ---
+structlog==24.4.0
+
+# --- Rate limiting ---
+slowapi==0.1.9
+
+# --- Supabase (DB + Auth + Storage) ---
+supabase==2.9.1
+
+# NOTE: Feature-specific deps (google-generativeai, edge-tts, pymupdf,
+# pytesseract, pillow, sentence-transformers, ragas, sentry-sdk, posthog) are
+# added as each feature lands. Keeping the image slim speeds up cold starts on
+# Hugging Face Spaces free tier.

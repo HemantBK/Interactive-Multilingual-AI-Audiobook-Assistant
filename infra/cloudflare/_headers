@@ -1,0 +1,15 @@
+# Cloudflare Pages — HTTP response headers
+# Applied to all routes under the Pages project.
+# Docs: https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: microphone=(), camera=(), geolocation=(), payment=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-site
+  # CSP note: we allow 'unsafe-inline' for styles only while Tailwind's JIT CDN is in use.
+  # Once we migrate to the Tailwind CLI build step (Week 2), tighten style-src to 'self'.
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://*.supabase.co https://*.hf.space wss://*.supabase.co; frame-ancestors 'none';
