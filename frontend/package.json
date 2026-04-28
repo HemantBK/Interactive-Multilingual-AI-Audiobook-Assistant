@@ -10,10 +10,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.47.10",
+    "dompurify": "^3.2.1",
+    "i18next": "^24.2.0",
+    "i18next-browser-languagedetector": "^8.0.2",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "dompurify": "^3.2.1",
-    "@supabase/supabase-js": "^2.47.10"
+    "react-i18next": "^15.4.0",
+    "react-markdown": "^9.0.1"
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.5",

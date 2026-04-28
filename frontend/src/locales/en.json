@@ -1,0 +1,16 @@
+{
+  "app": {
+    "name": "ARIA",
+    "tagline": "Multilingual AI reader with precise citations"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signInWithEmail": "Email me a magic link",
+    "signInWithGoogle": "Continue with Google",
+    "signOut": "Sign out",
+    "signedInAs": "Signed in as",
+    "emailPlaceholder": "you@example.com",
+    "checkInbox": "Check your inbox for the magic link."
+  },
+  "comingSoon": "Coming soon — we're still building."
+}

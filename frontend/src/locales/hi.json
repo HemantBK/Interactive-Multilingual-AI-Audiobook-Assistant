@@ -1,0 +1,16 @@
+{
+  "app": {
+    "name": "ARIA",
+    "tagline": "सटीक सन्दर्भों के साथ बहुभाषी एआई पाठक"
+  },
+  "auth": {
+    "signIn": "साइन इन करें",
+    "signInWithEmail": "मुझे मैजिक लिंक भेजें",
+    "signInWithGoogle": "Google से जारी रखें",
+    "signOut": "साइन आउट",
+    "signedInAs": "साइन इन हैं —",
+    "emailPlaceholder": "you@example.com",
+    "checkInbox": "मैजिक लिंक के लिए अपना इनबॉक्स देखें।"
+  },
+  "comingSoon": "जल्द आ रहा है — हम अभी निर्माण कर रहे हैं।"
+}

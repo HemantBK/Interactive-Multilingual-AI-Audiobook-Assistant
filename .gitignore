@@ -86,3 +86,8 @@ logs/
 /uploads/
 eval/reports/*
 !eval/reports/.gitkeep
+
+# ============================================================================
+# Claude Code — local session state (per-user, never commit)
+# ============================================================================
+.claude/

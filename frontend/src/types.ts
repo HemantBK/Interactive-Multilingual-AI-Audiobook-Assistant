@@ -1,49 +1,17 @@
-export enum AppState {
-  UPLOAD = 'UPLOAD',
-  PROCESSING = 'PROCESSING',
-  INTERACTIVE = 'INTERACTIVE'
-}
+/**
+ * Domain types shared across the frontend. Mirrors the backend data model
+ * in infra/supabase/migrations/0001_initial_schema.sql — keep them aligned.
+ *
+ * Day 1: only the types needed by the auth + landing scaffold. Document /
+ * RAG / chat types land alongside the endpoints that produce them
+ * (Week 1 Day 4+, see build plan A2.md).
+ */
 
-export interface DocumentChunk {
-  id: string;
-  text: string;
-  embedding?: number[];
-}
+export type DocumentStatus =
+  | 'queued'
+  | 'uploading'
+  | 'processing'
+  | 'ready'
+  | 'failed';
 
-export interface ChatMessage {
-  id: string;
-  role: 'user' | 'model';
-  text: string;
-  timestamp: number;
-}
-
-export interface VoiceOption {
-  name: string;
-  label: string;
-  gender: 'Male' | 'Female';
-}
-
-export const AVAILABLE_VOICES: VoiceOption[] = [
-  { name: 'Puck', label: 'Puck (Male)', gender: 'Male' },
-  { name: 'Charon', label: 'Charon (Male)', gender: 'Male' },
-  { name: 'Kore', label: 'Kore (Female)', gender: 'Female' },
-  { name: 'Fenrir', label: 'Fenrir (Male)', gender: 'Male' },
-  { name: 'Zephyr', label: 'Zephyr (Female)', gender: 'Female' },
-];
-
-export enum Language {
-  ENGLISH = 'English',
-  SPANISH = 'Spanish',
-  FRENCH = 'French',
-  GERMAN = 'German',
-  JAPANESE = 'Japanese',
-  CHINESE = 'Chinese',
-  PORTUGUESE = 'Portuguese',
-  ITALIAN = 'Italian',
-  RUSSIAN = 'Russian',
-  HINDI = 'Hindi',
-  BENGALI = 'Bengali',
-  MARATHI = 'Marathi',
-  TAMIL = 'Tamil',
-  TELUGU = 'Telugu'
-}
+export type SourceType = 'pdf' | 'image' | 'text';
