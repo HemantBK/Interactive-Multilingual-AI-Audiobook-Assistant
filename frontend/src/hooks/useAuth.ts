@@ -1,12 +1,15 @@
 /**
  * React hook for Supabase auth state + sign-in/out actions.
- * One subscription per app; unsubscribes on unmount.
+ * Notifies the backend's audit_log on fresh sign-ins and sign-outs (best-effort).
+ * Day 22: identifies the user in PostHog on SIGNED_IN; resets on SIGNED_OUT.
  */
 
 import { useCallback, useEffect, useState } from 'react';
 import type { Session, User } from '@supabase/supabase-js';
 
 import { supabase } from '../lib/supabase';
+import { identify, reset, track } from '../lib/analytics';
+import { notifyAuthEvent } from '../services/api';
 
 export interface AuthHook {
   user: User | null;
@@ -25,17 +28,33 @@ export function useAuth(): AuthHook {
   useEffect(() => {
     let mounted = true;
 
-    supabase.auth.getSession().then(({ data }) => {
+    void supabase.auth.getSession().then(({ data }) => {
       if (!mounted) return;
       setSession(data.session);
       setUser(data.session?.user ?? null);
       setLoading(false);
+      if (data.session?.user) {
+        identify(data.session.user.id);
+      }
     });
 
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
+    const { data: listener } = supabase.auth.onAuthStateChange((event, newSession) => {
       if (!mounted) return;
       setSession(newSession);
       setUser(newSession?.user ?? null);
+      if (event === 'SIGNED_IN' && newSession?.access_token) {
+        void notifyAuthEvent('login', newSession.access_token);
+        if (newSession.user) {
+          identify(newSession.user.id);
+          track('auth.signed_in', {
+            method: newSession.user.app_metadata?.provider ?? 'email',
+          });
+        }
+      }
+      if (event === 'SIGNED_OUT') {
+        track('auth.signed_out');
+        reset();
+      }
     });
 
     return () => {
@@ -61,8 +80,12 @@ export function useAuth(): AuthHook {
   }, []);
 
   const signOut = useCallback(async () => {
+    const token = session?.access_token;
+    if (token) {
+      void notifyAuthEvent('logout', token);
+    }
     await supabase.auth.signOut();
-  }, []);
+  }, [session]);
 
   return { user, session, loading, signInWithEmail, signInWithGoogle, signOut };
 }

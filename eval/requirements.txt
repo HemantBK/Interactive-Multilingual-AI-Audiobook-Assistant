@@ -1,0 +1,18 @@
+# Eval harness dependencies (build plan A2 §8 + Day 23).
+#
+# Sits alongside backend/requirements.txt — eval imports backend services
+# (embedding, retrieval, rerank, prompts) so backend deps must already be
+# installed in the same env. Install order:
+#
+#   pip install -r backend/requirements.txt
+#   pip install -r eval/requirements.txt
+
+# Golden-set Q/A judging
+ragas==0.2.6
+
+# Pytest-style assertions inside CLI runners
+pytest==8.3.3
+
+# Pin Hugging Face datasets to a working version (ragas pulls it transitively
+# but we want a known-good revision so nightly runs are reproducible).
+datasets==3.1.0

@@ -4,6 +4,10 @@
 pytest==8.3.3
 pytest-asyncio==0.24.0
 
+# --- Contract testing (Week 2 Day 14) ---
+schemathesis==3.39.5
+openapi-spec-validator==0.7.1
+
 # --- Lint / types ---
 ruff==0.7.4
 mypy==1.13.0

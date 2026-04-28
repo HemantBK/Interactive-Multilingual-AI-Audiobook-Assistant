@@ -11,8 +11,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 # System deps:
-#   tesseract-ocr + language packs (hin, tam, ben, mar, tel)
-#   libmupdf-dev helps PyMuPDF wheels on some architectures
+#   tesseract-ocr + Indic + English language packs (build plan A2 §3)
+#   libjpeg/zlib for Pillow on slim base
+#   curl for healthcheck
 RUN apt-get update && apt-get install -y --no-install-recommends \
         tesseract-ocr \
         tesseract-ocr-eng \

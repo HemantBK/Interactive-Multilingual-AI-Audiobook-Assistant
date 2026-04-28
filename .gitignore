@@ -91,3 +91,11 @@ eval/reports/*
 # Claude Code — local session state (per-user, never commit)
 # ============================================================================
 .claude/
+
+# ============================================================================
+# Playwright / e2e artifacts
+# ============================================================================
+frontend/playwright-report/
+frontend/test-results/
+frontend/.playwright/
+frontend/blob-report/

@@ -1,7 +1,20 @@
-import { type FormEvent, useState } from 'react';
+import { type FormEvent, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { ChatPanel } from './components/Chat/ChatPanel';
+import { ErrorBoundary } from './components/Common/ErrorBoundary';
+import { LoadingState } from './components/Common/LoadingState';
+import { DocumentList } from './components/Documents/DocumentList';
+import { DocumentViewer } from './components/Document/DocumentViewer';
+import { Dropzone } from './components/Upload/Dropzone';
 import { useAuth } from './hooks/useAuth';
+import { useDocuments } from './hooks/useDocuments';
+import type {
+  ChunkRef,
+  Citation,
+  CitationJump,
+  DocumentSummary,
+} from './types';
 
 const LANGS = [
   { code: 'en', label: 'English' },
@@ -52,7 +65,7 @@ function SignInForm() {
 
   if (sent) {
     return (
-      <p role="status" className="text-sm text-green-700">
+      <p role="status" className="text-sm text-green-800">
         {t('auth.checkInbox')}
       </p>
     );
@@ -97,10 +110,37 @@ function SignInForm() {
 
 export default function App() {
   const { t } = useTranslation();
-  const { user, loading, signOut } = useAuth();
+  const { user, session, loading, signOut } = useAuth();
+  const accessToken = session?.access_token ?? null;
+  const docs = useDocuments(accessToken);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [highlight, setHighlight] = useState<CitationJump | null>(null);
+
+  const selectedDoc = useMemo<DocumentSummary | null>(() => {
+    if (!selectedId) return null;
+    return docs.documents.find((d) => d.id === selectedId) ?? null;
+  }, [selectedId, docs.documents]);
+
+  const handleSelect = useCallback((d: DocumentSummary) => {
+    setSelectedId(d.id);
+    setHighlight(null);
+  }, []);
+
+  const handleCitationJump = useCallback(
+    (citation: Citation, chunk: ChunkRef | undefined) => {
+      setHighlight({ citation, chunk, nonce: Date.now() });
+    },
+    [],
+  );
 
   return (
     <div className="min-h-screen flex flex-col">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-white focus:px-3 focus:py-1 focus:rounded focus:shadow"
+      >
+        {t('a11y.skipToMain')}
+      </a>
       <header className="px-4 py-3 border-b border-slate-200 flex items-center justify-between bg-white">
         <div>
           <h1 className="text-lg font-bold">{t('app.name')}</h1>
@@ -119,17 +159,70 @@ export default function App() {
           )}
         </div>
       </header>
-      <main className="flex-1 p-8 max-w-3xl mx-auto w-full">
+      <main id="main" className="flex-1 p-4 md:p-6 max-w-[1400px] mx-auto w-full">
         {loading ? (
-          <p role="status" className="text-slate-500">
-            …
-          </p>
-        ) : user ? (
-          <div>
-            <p className="mb-2">
-              {t('auth.signedInAs')} <strong>{user.email}</strong>
-            </p>
-            <p className="text-slate-600">{t('comingSoon')}</p>
+          <LoadingState />
+        ) : user && accessToken ? (
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)] gap-4 lg:gap-6">
+            <aside className="space-y-4">
+              <Dropzone accessToken={accessToken} onUploaded={docs.refresh} />
+              <section aria-labelledby="documents-heading">
+                <h2
+                  id="documents-heading"
+                  className="text-sm font-bold mb-2 text-slate-700"
+                >
+                  {t('documents.heading')}
+                </h2>
+                <DocumentList
+                  documents={docs.documents}
+                  loading={docs.loading}
+                  error={docs.error}
+                  selectedId={selectedId}
+                  onSelect={handleSelect}
+                />
+              </section>
+            </aside>
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 min-h-[600px]">
+              <section
+                aria-labelledby="viewer-heading"
+                className="bg-white border border-slate-200 rounded overflow-hidden flex flex-col min-h-[400px] xl:min-h-[600px]"
+              >
+                <h2
+                  id="viewer-heading"
+                  className="text-sm font-bold px-3 py-2 border-b border-slate-200 text-slate-700"
+                >
+                  {t('viewer.heading')}
+                </h2>
+                <div className="flex-1 min-h-0">
+                  <ErrorBoundary>
+                    <DocumentViewer
+                      document={selectedDoc}
+                      highlight={highlight}
+                    />
+                  </ErrorBoundary>
+                </div>
+              </section>
+              <section
+                aria-labelledby="chat-heading"
+                className="min-h-[400px] xl:min-h-[600px] flex flex-col"
+              >
+                <h2
+                  id="chat-heading"
+                  className="text-sm font-bold mb-2 text-slate-700"
+                >
+                  {t('chat.heading')}
+                </h2>
+                <div className="flex-1">
+                  <ErrorBoundary>
+                    <ChatPanel
+                      document={selectedDoc}
+                      accessToken={accessToken}
+                      onCitationJump={handleCitationJump}
+                    />
+                  </ErrorBoundary>
+                </div>
+              </section>
+            </div>
           </div>
         ) : (
           <SignInForm />

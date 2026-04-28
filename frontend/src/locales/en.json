@@ -12,5 +12,87 @@
     "emailPlaceholder": "you@example.com",
     "checkInbox": "Check your inbox for the magic link."
   },
+  "upload": {
+    "regionLabel": "Upload area",
+    "inputLabel": "Choose a file to upload",
+    "prompt": "Drop a PDF, image, or text file (≤ 50 MB) — or click to choose one.",
+    "maxSize": "Up to 50 MB. PDF, JPEG, PNG, WebP, plain text.",
+    "uploading": "Uploading and queuing for processing…",
+    "successToast": "{{name}} uploaded — indexing now.",
+    "errorToast": "Upload failed: {{message}}"
+  },
+  "documents": {
+    "heading": "Your documents",
+    "empty": "No documents yet — upload one to get started.",
+    "pages": "pages",
+    "status": {
+      "queued": "Queued",
+      "uploading": "Uploading",
+      "processing": "Processing",
+      "ready": "Ready",
+      "failed": "Failed"
+    }
+  },
+  "viewer": {
+    "heading": "Source",
+    "noDocument": "Pick a document to preview it here.",
+    "notReady": "Document is {{status}}. The viewer opens once it is ready.",
+    "loading": "Loading document…",
+    "loadFailed": "Could not load this document.",
+    "textComingSoon": "Plain-text viewer arrives in a later release."
+  },
+  "chat": {
+    "heading": "Ask questions",
+    "regionLabel": "Chat with the selected document",
+    "pickDocument": "Pick a ready document to start chatting.",
+    "notReady": "This document is {{status}}. Wait until it's ready to ask questions.",
+    "empty": "Ask anything about this document — every answer cites the exact passage.",
+    "thinking": "Thinking…",
+    "errorHeading": "Couldn't answer that",
+    "placeholder": "Ask a question about this document",
+    "questionLabel": "Question",
+    "send": "Send",
+    "sendBusy": "Sending…",
+    "clear": "Clear",
+    "page": "Page",
+    "jumpToPage": "Jump to page {{page}} and highlight passage",
+    "jumpToCitation": "Highlight cited passage",
+    "translate": {
+      "label": "Translate this answer",
+      "placeholder": "Translate to…",
+      "busy": "Translating…",
+      "clear": "Show original only",
+      "heading": "Translation ({{lang}})",
+      "cached": "from cache"
+    }
+  },
+  "audio": {
+    "play": "Narrate",
+    "busy": "Loading audio…",
+    "stop": "Stop",
+    "playLabel": "Narrate this answer",
+    "playerLabel": "Audio player",
+    "cached": "Audio served from cache",
+    "fallback": "via Piper fallback",
+    "voiceLabel": "Choose voice",
+    "keyboardHint": "Space play/pause · ←/→ seek 5s · ↑/↓ volume · M mute · 0 restart",
+    "unsupported": "Your browser does not support audio playback."
+  },
+  "a11y": {
+    "skipToMain": "Skip to main content"
+  },
+  "loading": {
+    "default": "Loading…"
+  },
+  "toast": {
+    "regionLabel": "Notifications",
+    "dismiss": "Dismiss notification"
+  },
+  "errors": {
+    "boundary": {
+      "title": "Something went wrong",
+      "retry": "Try again"
+    }
+  },
   "comingSoon": "Coming soon — we're still building."
 }

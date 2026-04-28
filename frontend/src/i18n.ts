@@ -23,4 +23,16 @@ void i18n
     },
   });
 
+// Day 21 a11y: sync <html lang> with the active i18n language so screen
+// readers (NVDA, VoiceOver) pronounce UI strings in the right language.
+// Per-content `lang={...}` overrides this for embedded snippets in
+// other languages (e.g. an English question with a Hindi answer).
+if (typeof document !== 'undefined') {
+  const apply = (lng: string) => {
+    document.documentElement.lang = (lng || 'en').slice(0, 2);
+  };
+  apply(i18n.language);
+  i18n.on('languageChanged', apply);
+}
+
 export default i18n;

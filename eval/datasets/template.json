@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "generated_at": null,
+  "items": [
+    {
+      "id": "EXAMPLE-ret-en-001",
+      "set": "retrieval",
+      "language": "en",
+      "doc_path": "fixtures/sample.pdf",
+      "question": "What is the formula for the sum of an arithmetic series?",
+      "expected_chunk_text_excerpt": "Sn = n/2 (a + l)",
+      "expected_page": 12,
+      "labeler": "your-handle",
+      "labeled_at": "2026-04-28"
+    }
+  ]
+}
