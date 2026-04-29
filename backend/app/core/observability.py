@@ -1,7 +1,7 @@
 """
-Sentry + PostHog setup (build plan A2 §17 + §9 Day 22).
+Sentry + PostHog setup (build plan §17 + §9 Day 22).
 
-Sampling per A2 §9 cost note: traces at 10%, errors at 100%. Stays under
+Sampling per build plan §9 cost note: traces at 10%, errors at 100%. Stays under
 the free 5K events/mo at v1 traffic; one bad deploy doesn't burn the
 whole monthly budget.
 

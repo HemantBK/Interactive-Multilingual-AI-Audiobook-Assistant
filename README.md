@@ -1,13 +1,13 @@
-# ARIA
+# Interactive Audiobook-Assistant
 
-**Automated Reading Interactive Assistant** — multilingual AI reader for books, PDFs, and images with **precise citations**, native-quality Indic voices, and a free-at-v1-scale stack.
+Multilingual AI reader for books, PDFs, and images with **precise citations**, native-quality Indic voices, and a free-at-v1-scale stack.
 
-> Status: v1 in build (~ Phase 4 / 6). Active plan: [`build plan A2.md`](./build%20plan%20A2.md). Shipped artefacts: [`CHANGELOG.md`](./CHANGELOG.md). License: Apache-2.0.
+> Status: v1 in build (~ Phase 4 / 6). Active plan: [`build plan.md`](./build%20plan.md). Shipped artefacts: [`CHANGELOG.md`](./CHANGELOG.md). License: Apache-2.0.
 
 ## Why
 
 Mainstream readers (NotebookLM, Speechify, ElevenLabs Reader) treat Indic
-languages as an afterthought. ARIA flips that: general-purpose product,
+languages as an afterthought. We flip that: general-purpose product,
 **Hindi / Bengali / Marathi / Tamil / Telugu first-class**, **Citation Mode**
 (every answer pinned to the exact source paragraph) as the moat.
 
@@ -22,7 +22,7 @@ languages as an afterthought. ARIA flips that: general-purpose product,
 ## 60-second quickstart
 
 ```bash
-git clone <repo-url> aria && cd aria
+git clone <repo-url> audiobook-assistant && cd audiobook-assistant
 cp .env.example .env   # fill in Supabase + Groq keys
 
 # Backend
@@ -40,9 +40,9 @@ Full guide: [`docs/QUICKSTART.md`](docs/QUICKSTART.md).
 ## Documentation
 
 ```
-README.md             ← you are here
-build plan A2.md      ← active 6-week build plan
-CHANGELOG.md          ← shipped per day
+README.md           ← you are here
+build plan.md       ← active 6-week build plan
+CHANGELOG.md        ← shipped per day
 
 docs/
 ├── INDEX.md           ← all docs by audience (start here for the deep dive)

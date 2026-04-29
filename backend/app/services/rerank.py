@@ -4,12 +4,12 @@ bge-reranker-v2-m3 cross-encoder (sentence-transformers, MIT).
 A cross-encoder runs the (question, chunk) pair through one transformer
 forward pass, producing a relevance score. Slower than dual-encoder retrieval
 but materially more accurate at the top — critical for the 90% citation
-precision target (build plan A2 §8).
+precision target (build plan §8).
 
 CPU latency on HF Spaces 2-vCPU: ~150 ms for 20 candidates. Bounded by the
 top-k from retrieval, not by document size.
 
-Lazy singleton load to keep cold start fast (build plan A2 §3).
+Lazy singleton load to keep cold start fast (build plan §3).
 """
 
 from __future__ import annotations

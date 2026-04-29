@@ -2,20 +2,20 @@
  * HTTP client for the ARIA FastAPI backend.
  *
  * The frontend only talks to OUR backend — never to Groq/Gemini/etc. directly.
- * All third-party API keys live in HF Space secrets (build plan A2 §6).
+ * All third-party API keys live in HF Space secrets (build plan §6).
  */
 
-import type {
-  CreateDocumentResponse,
-  DocumentSummary,
-  RAGEvent,
-} from '../types';
+import type { CreateDocumentResponse, DocumentSummary, RAGEvent } from '../types';
 
 export const API_BASE_URL: string =
   (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? 'http://localhost:7860';
 
 export class ApiError extends Error {
-  constructor(public status: number, public endpoint: string, message: string) {
+  constructor(
+    public status: number,
+    public endpoint: string,
+    message: string,
+  ) {
     super(`${status} ${endpoint}: ${message}`);
     this.name = 'ApiError';
   }
@@ -40,11 +40,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return (await res.json()) as T;
 }
 
-async function authedRequest<T>(
-  path: string,
-  accessToken: string,
-  init?: RequestInit,
-): Promise<T> {
+async function authedRequest<T>(path: string, accessToken: string, init?: RequestInit): Promise<T> {
   return request<T>(path, {
     ...init,
     headers: {
@@ -71,10 +67,7 @@ export function health(): Promise<HealthResponse> {
 
 export type AuthEventAction = 'login' | 'logout';
 
-export async function notifyAuthEvent(
-  action: AuthEventAction,
-  accessToken: string,
-): Promise<void> {
+export async function notifyAuthEvent(action: AuthEventAction, accessToken: string): Promise<void> {
   try {
     const res = await fetch(`${API_BASE_URL}/auth/${action}`, {
       method: 'POST',
@@ -97,10 +90,7 @@ export function listDocuments(accessToken: string): Promise<DocumentSummary[]> {
   return authedRequest<DocumentSummary[]>('/documents', accessToken);
 }
 
-export function getDocument(
-  id: string,
-  accessToken: string,
-): Promise<DocumentSummary> {
+export function getDocument(id: string, accessToken: string): Promise<DocumentSummary> {
   return authedRequest<DocumentSummary>(`/documents/${encodeURIComponent(id)}`, accessToken);
 }
 
@@ -197,10 +187,7 @@ export interface TranslateResponse {
   target_language: string;
 }
 
-export function translate(
-  body: TranslateRequest,
-  accessToken: string,
-): Promise<TranslateResponse> {
+export function translate(body: TranslateRequest, accessToken: string): Promise<TranslateResponse> {
   return authedRequest<TranslateResponse>('/translate', accessToken, {
     method: 'POST',
     body: JSON.stringify(body),
@@ -231,10 +218,7 @@ export interface VoiceOptionDTO {
   gender: 'female' | 'male';
 }
 
-export function synthesizeTTS(
-  body: TTSRequest,
-  accessToken: string,
-): Promise<TTSResponse> {
+export function synthesizeTTS(body: TTSRequest, accessToken: string): Promise<TTSResponse> {
   return authedRequest<TTSResponse>('/tts', accessToken, {
     method: 'POST',
     body: JSON.stringify(body),

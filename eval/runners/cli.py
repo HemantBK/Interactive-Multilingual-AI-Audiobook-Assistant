@@ -37,7 +37,7 @@ from .retrieval_eval import evaluate_retrieval
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
 
-# Targets per build plan A2 §8.
+# Targets per build plan §8.
 TARGETS = {
     "hit_at_5": 0.85,
     "citation_precision": 0.90,

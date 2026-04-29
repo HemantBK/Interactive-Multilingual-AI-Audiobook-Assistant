@@ -1,5 +1,5 @@
 """
-Best-effort filter on LLM-generated text (build plan A2 §6).
+Best-effort filter on LLM-generated text (build plan §6).
 
 We watch for two classes of badness in model output:
 
@@ -39,7 +39,7 @@ _CREDENTIAL_PATTERNS: Final[tuple[re.Pattern[str], ...]] = (
     re.compile(r"\bASIA[0-9A-Z]{16}\b"),                       # AWS STS
     re.compile(r"\bghp_[A-Za-z0-9]{30,}\b"),                   # GitHub PAT
     re.compile(r"-----BEGIN [A-Z ]+PRIVATE KEY-----"),          # PEM keys
-    re.compile(r"\beyJ[A-Za-z0-9_\-]{20,}\.eyJ[A-Za-z0-9_\-]+\.[A-Za-z0-9_\-]+\b"),  # JWT
+    re.compile(r"\beyJ[A-Za-z0-9_\-]{15,}\.eyJ[A-Za-z0-9_\-]+\.[A-Za-z0-9_\-]+\b"),  # JWT
 )
 
 _HTML_DANGEROUS = re.compile(

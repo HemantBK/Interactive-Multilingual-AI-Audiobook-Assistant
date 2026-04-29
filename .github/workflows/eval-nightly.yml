@@ -1,6 +1,6 @@
 name: Eval (nightly)
 
-# Build plan A2 §8: nightly eval of retrieval / citation / faithfulness against
+# Build plan §8: nightly eval of retrieval / citation / faithfulness against
 # the golden set. Posts the report as an artifact and fails the workflow if any
 # Tier-1 SLO is missed (Day 23). Day 24 wires this into the deploy gate.
 #

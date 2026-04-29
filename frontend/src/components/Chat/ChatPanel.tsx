@@ -54,8 +54,7 @@ export function ChatPanel({ document, accessToken, onCitationJump }: Props) {
           <p className="font-medium truncate">{document.title}</p>
           <p className="text-xs text-slate-500">
             {document.source_type.toUpperCase()}
-            {document.page_count != null &&
-              ` · ${document.page_count} ${t('documents.pages')}`}
+            {document.page_count != null && ` · ${document.page_count} ${t('documents.pages')}`}
           </p>
         </div>
         {messages.length > 0 && (
@@ -73,15 +72,13 @@ export function ChatPanel({ document, accessToken, onCitationJump }: Props) {
         <MessageList
           messages={messages}
           busy={busy}
+          accessToken={accessToken}
+          documentLanguageHint={document.source_language}
           onCitationJump={onCitationJump}
         />
       </div>
 
-      <MessageInput
-        disabled={!accessToken}
-        busy={busy}
-        onSubmit={(q) => ask(document.id, q)}
-      />
+      <MessageInput disabled={!accessToken} busy={busy} onSubmit={(q) => ask(document.id, q)} />
     </section>
   );
 }

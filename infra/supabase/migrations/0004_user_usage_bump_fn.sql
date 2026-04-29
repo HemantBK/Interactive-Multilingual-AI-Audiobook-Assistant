@@ -1,5 +1,5 @@
 -- =============================================================================
--- ARIA — atomic per-user daily quota counter (build plan A2 §6, §11, Day 18)
+-- ARIA — atomic per-user daily quota counter (build plan §6, §11, Day 18)
 --
 -- Increments one of the user_usage_daily counters atomically and returns
 -- the post-increment value. The caller compares against the configured

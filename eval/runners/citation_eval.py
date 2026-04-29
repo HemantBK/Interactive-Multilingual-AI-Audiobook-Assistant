@@ -1,5 +1,5 @@
 """
-Citation precision via LLM-as-judge (build plan A2 §8 Day 23).
+Citation precision via LLM-as-judge (build plan §8 Day 23).
 
 For each citation-set golden item:
   1. Run the production RAG pipeline against the labelled doc + question.
@@ -10,7 +10,7 @@ For each citation-set golden item:
 
 Why LLM-as-judge: hand-grading 100 Q/A pairs per release is the only
 alternative; our deterministic citation validator (Day 9) only checks
-substring presence, not semantic support. See A2 §8.
+substring presence, not semantic support. See build plan §8.
 
 Lightweight: no ragas dep, no extra HF model. Single Groq call per
 citation, cached at the prompt level by Groq's deduplication.

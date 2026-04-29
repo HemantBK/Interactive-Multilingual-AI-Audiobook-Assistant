@@ -1,5 +1,5 @@
 """
-Prompt A/B runner (build plan A2 §9 + §19, Day 33 wires automation).
+Prompt A/B runner (build plan §9 + §19, Day 33 wires automation).
 
 Runs the answer-faithfulness + citation-precision eval against TWO prompt
 versions back-to-back and reports the delta. Used by the Day 33 prompt

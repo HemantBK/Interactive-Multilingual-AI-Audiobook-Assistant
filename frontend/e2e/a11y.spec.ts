@@ -18,9 +18,7 @@ test('home page has zero axe violations (WCAG 2.1 AA)', async ({ page }) => {
 
 test('home page has zero axe violations in Hindi', async ({ page }) => {
   await page.goto('/');
-  await page
-    .getByRole('combobox', { name: /language/i })
-    .selectOption('hi');
+  await page.getByRole('combobox', { name: /language/i }).selectOption('hi');
 
   const results = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])

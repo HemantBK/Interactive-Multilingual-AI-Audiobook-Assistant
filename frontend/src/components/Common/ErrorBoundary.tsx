@@ -41,26 +41,13 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 }
 
-function DefaultFallback({
-  error,
-  onReset,
-}: {
-  error: Error;
-  onReset: () => void;
-}) {
+function DefaultFallback({ error, onReset }: { error: Error; onReset: () => void }) {
   const { t } = useTranslation();
   return (
-    <div
-      role="alert"
-      className="border border-red-300 bg-red-50 text-red-900 p-4 rounded"
-    >
+    <div role="alert" className="border border-red-300 bg-red-50 text-red-900 p-4 rounded">
       <h2 className="font-bold">{t('errors.boundary.title')}</h2>
       <p className="text-sm mt-1 break-words">{error.message}</p>
-      <button
-        type="button"
-        onClick={onReset}
-        className="mt-3 text-sm underline"
-      >
+      <button type="button" onClick={onReset} className="mt-3 text-sm underline">
         {t('errors.boundary.retry')}
       </button>
     </div>

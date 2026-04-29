@@ -1,5 +1,5 @@
 """
-Unified TTS — edge-tts primary, Piper fallback (build plan A2 §3, Day 15).
+Unified TTS — edge-tts primary, Piper fallback (build plan §3, Day 15).
 
   synthesize(text, voice_id)
        │

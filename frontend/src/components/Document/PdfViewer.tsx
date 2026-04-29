@@ -44,8 +44,7 @@ export default function PdfViewer({ src, highlight, width = 720 }: Props) {
         {numPages != null &&
           Array.from({ length: numPages }, (_, i) => i + 1).map((p) => {
             const scale = pageScales[p];
-            const boxes =
-              highlight?.chunk?.bbox?.filter((b) => b.page === p) ?? [];
+            const boxes = highlight?.chunk?.bbox?.filter((b) => b.page === p) ?? [];
             return (
               <div
                 key={p}
@@ -67,9 +66,7 @@ export default function PdfViewer({ src, highlight, width = 720 }: Props) {
                     );
                   }}
                 />
-                {scale && boxes.length > 0 && (
-                  <BboxOverlay boxes={boxes} scale={scale} />
-                )}
+                {scale && boxes.length > 0 && <BboxOverlay boxes={boxes} scale={scale} />}
               </div>
             );
           })}

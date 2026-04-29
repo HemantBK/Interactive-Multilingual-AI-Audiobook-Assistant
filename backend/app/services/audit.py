@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from app.db.supabase import admin_client
@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 def _hash_ip(ip: str | None) -> str | None:
     if not ip:
         return None
-    today = datetime.now(timezone.utc).date().isoformat()
+    today = datetime.now(UTC).date().isoformat()
     digest = hashlib.sha256(f"{ip}|{today}".encode()).hexdigest()
     return digest[:32]
 

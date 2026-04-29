@@ -1,6 +1,6 @@
-# ARIA evaluation harness
+# Evaluation harness
 
-Build plan A2 §8 + Day 23 wire the actual harness. Day 7 ships the
+Build plan §8 + Day 23 wire the actual harness. Day 7 ships the
 **scaffolding + golden-set methodology** so labeling can run in parallel
 with the rest of the build.
 
@@ -8,7 +8,7 @@ Why this matters: free-tier LLM apps silently degrade when providers
 swap models or rate-limit. The eval suite is our early-warning system —
 nightly Action posts a regression check on every PR before merge.
 
-## Goals (per build plan A2 §8)
+## Goals (per build plan §8)
 
 | Set | Target | Use |
 |---|---|---|

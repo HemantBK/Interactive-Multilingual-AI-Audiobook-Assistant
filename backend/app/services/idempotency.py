@@ -1,5 +1,5 @@
 """
-Idempotency-key check + store for write endpoints (build plan A2 §11).
+Idempotency-key check + store for write endpoints (build plan §11).
 
 Strategy:
   - Caller provides `Idempotency-Key: <uuid>`. Required on mutating requests.

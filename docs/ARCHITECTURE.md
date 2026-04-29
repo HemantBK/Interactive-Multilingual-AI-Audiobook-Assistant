@@ -1,6 +1,6 @@
 # Architecture
 
-The authoritative plan is [`build plan A2.md`](../build%20plan%20A2.md).
+The authoritative plan is [`build plan.md`](../build%20plan.md).
 This page is the **evergreen** view — the plan freezes at v1 launch, this
 file moves with the code.
 

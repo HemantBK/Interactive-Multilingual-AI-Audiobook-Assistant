@@ -37,7 +37,7 @@ To turn off: set `KILL_SWITCH=false` (or remove the secret) and restart.
 If a real user hits a cold start, they see a `Loading…` state for ~30s.
 Acceptable v1 behaviour; flagged in [SLOs.md](SLOs.md) honest-latency table.
 
-**Permanent fix**: v1.5 trigger in [build plan A2.md §25](../build%20plan%20A2.md) moves the
+**Permanent fix**: v1.5 trigger in [build plan.md §25](../build%20plan.md) moves the
 backend to Fly.io (3 always-on free VMs).
 
 ## Scenario: Groq rate limit
@@ -54,7 +54,7 @@ Groq's daily window resets (UTC midnight).
 3. Set `GEMINI_API_KEY` (paid) and flip the LLM choice via env flag (TODO Day 33: make this a single config switch; today it's a code change).
 
 **Postmortem**: at 60% RPD for 14 days running the v1.5 trigger
-(build plan A2 §25) fires automatically — file an issue and migrate
+(build plan §25) fires automatically — file an issue and migrate
 before this scenario recurs.
 
 ## Scenario: Indexing stuck in `processing`
@@ -75,7 +75,7 @@ Then the next upload (or a manual `python -m backend.app.scripts.drain`
 once we ship it) will retry.
 
 **Permanent fix**: startup hook to drain orphans on every worker boot
-([build plan A2 §10 Day 5](../build%20plan%20A2.md)). Scheduled, not
+([build plan §10 Day 5](../build%20plan.md)). Scheduled, not
 yet implemented.
 
 ## Scenario: Supabase DB > 80%
@@ -89,7 +89,7 @@ delete from public.documents where created_at < now() - interval '14 days'
 ```
 
 **Fix (sustained)**: Migrate to Supabase Pro ($25/mo, 8 GB DB). Per
-[build plan A2 §25](../build%20plan%20A2.md) capacity watermarks, this
+[build plan §25](../build%20plan.md) capacity watermarks, this
 should auto-trigger via the cron at >70% for 7 days.
 
 ## Scenario: prompt iteration introduced a regression
@@ -118,7 +118,7 @@ what the next iteration learned.
 4. Identify scope (which users? which data fields? when?).
 5. Notify affected users by email (Supabase Auth gives us the address).
 6. Notify India Data Protection Board within 72h.
-7. File breach disclosure on the ARIA repo.
+7. File breach disclosure on this repo.
 
 Refer to [legal/privacy.md §9 Breach notification](legal/privacy.md).
 
@@ -134,7 +134,7 @@ Refer to [legal/privacy.md §9 Breach notification](legal/privacy.md).
 ## DR (lands Day 28)
 
 Daily pg_dump to Cloudflare R2. RTO 4h, RPO 24h. Full restore drill
-documented quarterly per [build plan A2 §24](../build%20plan%20A2.md).
+documented quarterly per [build plan §24](../build%20plan.md).
 
 ## Pages route to
 

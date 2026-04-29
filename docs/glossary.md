@@ -1,6 +1,6 @@
 # Glossary
 
-Terms used across ARIA's docs + code.
+Terms used across this project's docs + code.
 
 | Term | Meaning |
 |---|---|

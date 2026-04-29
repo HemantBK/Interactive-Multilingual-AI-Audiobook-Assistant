@@ -1,5 +1,5 @@
 """
-ARIA Backend — FastAPI entry point.
+Interactive Audiobook-Assistant — backend (FastAPI entry point).
 
 Day 22: Sentry init runs at module import (before FastAPI app creation)
 so Sentry can patch starlette/fastapi internals. Day 18 KILL_SWITCH
@@ -30,7 +30,7 @@ from app.services.prompt_registry import ensure_prompt_registered
 from app.services.prompts import PROMPT_ID, PROMPT_VERSION, SYSTEM_PROMPT
 
 logging.basicConfig(level=settings.log_level.upper())
-logger = logging.getLogger("aria")
+logger = logging.getLogger("audiobook-assistant")
 
 # Sentry init must happen BEFORE app/route construction so the FastAPI
 # integration can monkey-patch the framework. No-op when DSN absent.
@@ -56,7 +56,7 @@ async def lifespan(_app: FastAPI):
 
 
 app = FastAPI(
-    title="ARIA API",
+    title="Interactive Audiobook-Assistant API",
     version="0.1.0",
     description="Multilingual AI audiobook + RAG with precise citations.",
     lifespan=lifespan,
@@ -86,7 +86,7 @@ app.include_router(user_api.router)
 async def health() -> dict[str, str]:
     return {
         "status": "ok",
-        "service": "aria-api",
+        "service": "audiobook-assistant-api",
         "version": app.version,
         "env": settings.app_env,
         "kill_switch": "on" if settings.kill_switch else "off",
@@ -95,4 +95,4 @@ async def health() -> dict[str, str]:
 
 @app.get("/", tags=["meta"])
 async def root() -> dict[str, str]:
-    return {"message": "ARIA API. See /docs for OpenAPI."}
+    return {"message": "Interactive Audiobook-Assistant API. See /docs for OpenAPI."}

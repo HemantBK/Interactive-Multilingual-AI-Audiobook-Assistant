@@ -1,5 +1,5 @@
 """
-User self-service: export + delete (build plan A2 §26 Day 25).
+User self-service: export + delete (build plan §26 Day 25).
 
 Right to portability  (DPDP §11 / GDPR Art. 20)  → GET  /user/me/export
 Right to erasure      (DPDP §12 / GDPR Art. 17)  → DELETE /user/me
@@ -11,9 +11,8 @@ deletes immediately.
 
 from __future__ import annotations
 
-import json
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
@@ -82,7 +81,7 @@ async def export_my_data(
     )
 
     return UserExport(
-        exported_at=datetime.now(timezone.utc).isoformat(),
+        exported_at=datetime.now(UTC).isoformat(),
         user_id=user.user_id,
         email=user.email,
         documents=documents,
@@ -163,11 +162,11 @@ async def delete_my_account(
     # Drop the auth.users row → invalidates JWT immediately.
     try:
         db.auth.admin.delete_user(user_id)
-    except Exception:
+    except Exception as err:
         logger.exception("auth.users delete for %s failed", user_id)
         raise HTTPException(
             status.HTTP_500_INTERNAL_SERVER_ERROR,
             "Account data wiped, but auth user couldn't be deleted. Contact support.",
-        )
+        ) from err
 
     return Response(status_code=status.HTTP_204_NO_CONTENT)

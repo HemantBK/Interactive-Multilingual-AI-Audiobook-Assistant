@@ -6,9 +6,9 @@
 
 > ⚠️ **Draft v1.** Lawyer review required before commercial launch.
 
-## 1. What ARIA is
+## 1. What this service is
 
-ARIA is a multilingual AI reader: upload a document, ask questions
+Audiobook-Assistant is a multilingual AI reader: upload a document, ask questions
 backed by precise citations, listen via text-to-speech, translate
 between 14 languages. The service is provided **as-is** at v1.
 
@@ -16,7 +16,7 @@ between 14 languages. The service is provided **as-is** at v1.
 
 - You must be 18+ (DPDP threshold for Indian users).
 - You must own or have a valid right to use any document you upload.
-- You must not use ARIA to violate anyone's copyright, privacy, or
+- You must not use this service to violate anyone's copyright, privacy, or
   applicable law.
 
 ## 3. Acceptable use
@@ -47,7 +47,7 @@ We may suspend or terminate your account for violations.
 
 ## 5. Service availability
 
-ARIA is hosted on free-tier infrastructure during v1 (build plan A2 §3).
+Audiobook-Assistant is hosted on free-tier infrastructure during v1 (build plan §3).
 Expect:
 - Cold starts after periods of inactivity (Hugging Face Spaces sleeps).
 - Occasional rate limits when the daily Groq quota is exhausted.
@@ -58,7 +58,7 @@ We make no SLA promises at v1.
 
 ## 6. Pricing
 
-ARIA is **free at v1 scale (~50 daily users)**. We may introduce paid
+The service is **free at v1 scale (~50 daily users)**. We may introduce paid
 tiers later; existing free use will continue under the same terms unless
 explicitly changed with 30 days' notice.
 

@@ -5,7 +5,7 @@ import { track } from '../../lib/analytics';
 import { ApiError, translate } from '../../services/api';
 
 /**
- * 14 target languages per build plan A2 §1. Labels are in the target's own
+ * 14 target languages per build plan §1. Labels are in the target's own
  * script — translating the language name itself wastes lookup time and
  * "हिन्दी" / "Tamil" / "中文" are universally legible to native readers.
  */

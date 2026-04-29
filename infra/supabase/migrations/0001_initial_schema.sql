@@ -1,10 +1,10 @@
 -- =============================================================================
--- ARIA — Initial Schema (build plan A2, Day 2)
+-- ARIA — Initial Schema (build plan, Day 2)
 -- Run via Supabase SQL editor or `supabase db push`.
 -- Row-Level Security is ENABLED on every user-facing table.
 --
 -- This is the consolidated initial migration. Subsequent migrations land in
--- 0002_*.sql onward and MUST ship with a `down` block (A2 §16).
+-- 0002_*.sql onward and MUST ship with a `down` block (build plan §16).
 -- =============================================================================
 
 -- -----------------------------------------------------------------------------
@@ -190,7 +190,7 @@ create policy "users read own usage"
 -- Writes go through service_role only.
 
 -- =============================================================================
--- prompts — versioned prompt registry; exactly one is_active per id (A2 §9)
+-- prompts — versioned prompt registry; exactly one is_active per id (build plan §9)
 -- =============================================================================
 create table if not exists public.prompts (
     id           text not null,                 -- e.g., 'rag.system'
@@ -206,7 +206,7 @@ create unique index if not exists prompts_one_active_per_id
 -- No user-facing RLS: backend-only writes; reads fetched by backend per-request.
 
 -- =============================================================================
--- audit_log — security-relevant events (A2 §18)
+-- audit_log — security-relevant events (build plan §18)
 -- 30-day retention via pg_cron (see 0002_pg_cron_jobs.sql)
 -- =============================================================================
 create table if not exists public.audit_log (
@@ -230,7 +230,7 @@ create policy "users read own audit rows"
 -- Inserts only via service_role.
 
 -- =============================================================================
--- idempotency_keys — replay-safe POST endpoints (A2 §11)
+-- idempotency_keys — replay-safe POST endpoints (build plan §11)
 -- 24h TTL via pg_cron
 -- =============================================================================
 create table if not exists public.idempotency_keys (

@@ -1,6 +1,6 @@
 # RLS verification runbook
 
-Build plan A2 §6 threat #7. Run before every public deploy + after any
+Build plan §6 threat #7. Run before every public deploy + after any
 migration that touches user-facing tables. Failures here are P0.
 
 ## Setup

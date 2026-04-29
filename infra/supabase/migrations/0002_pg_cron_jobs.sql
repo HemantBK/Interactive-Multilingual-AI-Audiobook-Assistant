@@ -1,5 +1,5 @@
 -- =============================================================================
--- ARIA — pg_cron jobs (build plan A2, Day 2)
+-- ARIA — pg_cron jobs (build plan, Day 2)
 --
 -- PREREQUISITE: enable pg_cron in the Supabase dashboard
 --   Database → Extensions → pg_cron → toggle on
@@ -13,7 +13,7 @@
 -- -----------------------------------------------------------------------------
 create extension if not exists pg_cron;
 
--- 14-day document cleanup (A2 §1: retention ≤ 14 days unless user opts in)
+-- 14-day document cleanup (build plan §1: retention ≤ 14 days unless user opts in)
 -- Skipped for documents that have a row in documents_keepalive.
 select cron.schedule(
     'aria_doc_cleanup_14d',
@@ -28,7 +28,7 @@ select cron.schedule(
     $cron$
 );
 
--- Idempotency keys: 24h TTL (A2 §4)
+-- Idempotency keys: 24h TTL (build plan §4)
 select cron.schedule(
     'aria_idempotency_cleanup',
     '17 * * * *',

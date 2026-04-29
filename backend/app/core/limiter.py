@@ -1,5 +1,5 @@
 """
-slowapi setup — per-IP rate limits (build plan A2 §6, Day 18).
+slowapi setup — per-IP rate limits (build plan §6, Day 18).
 
 Why per-IP and not per-user: pre-auth attempts (sign-in storms) and
 unauthenticated probes still need throttling. After auth, per-user

@@ -1,6 +1,6 @@
 # Service Level Objectives
 
-Build plan A2 §17 + Day 22. SLOs are user-facing promises tied to a
+Build plan §17 + Day 22. SLOs are user-facing promises tied to a
 fixed measurement window. They drive paging thresholds, deploy-freeze
 decisions, and the v1.5 capacity-trigger policy in §25.
 
@@ -26,7 +26,7 @@ decisions, and the v1.5 capacity-trigger policy in §25.
 
 A 99.5% / 30-day SLO buys **3.6 hours** of downtime per month. We do not
 ship new features when more than 50% of the current window's budget is
-consumed. The kill-switch (build plan A2 §6) is the lever for stopping
+consumed. The kill-switch (build plan §6) is the lever for stopping
 budget burn during an incident.
 
 | Window | Budget at 99.5% | Budget at 99% |

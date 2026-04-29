@@ -17,9 +17,7 @@ export function EmptyState({ title, description, action }: Props) {
       className="border border-dashed border-slate-300 rounded p-6 text-center bg-white"
     >
       <p className="font-medium text-slate-700">{title}</p>
-      {description && (
-        <p className="text-sm text-slate-500 mt-1">{description}</p>
-      )}
+      {description && <p className="text-sm text-slate-500 mt-1">{description}</p>}
       {action && <div className="mt-3">{action}</div>}
     </div>
   );

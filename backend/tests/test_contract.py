@@ -1,6 +1,6 @@
 """
 schemathesis contract tests — property-based fuzzing of the API against
-its declared OpenAPI schema (build plan A2 §14, Day 14).
+its declared OpenAPI schema (build plan §14, Day 14).
 
 Default scope: only unauth endpoints (/health, /). Authenticated endpoints
 are skipped because the fuzzer has no JWT — adding one would require an

@@ -63,4 +63,4 @@ Expected jobs:
 
 ## Migrations going forward
 
-From `0002` onward, every migration ships with both an `-- Up` and `-- Down` block (build plan A2 §16). CI verifies migrations apply cleanly on a shadow DB before they touch `main`.
+From `0002` onward, every migration ships with both an `-- Up` and `-- Down` block (build plan §16). CI verifies migrations apply cleanly on a shadow DB before they touch `main`.

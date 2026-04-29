@@ -99,10 +99,13 @@ export function AudioPlayer({
   }, [onActiveParagraphChange, onEnded]);
 
   // Pause on unmount — leaving audio playing in the background is rude.
-  useEffect(() => () => {
-    audioRef.current?.pause();
-    onActiveParagraphChange(null);
-  }, [onActiveParagraphChange]);
+  useEffect(
+    () => () => {
+      audioRef.current?.pause();
+      onActiveParagraphChange(null);
+    },
+    [onActiveParagraphChange],
+  );
 
   // Keyboard shortcuts on the wrapper.
   useEffect(() => {
@@ -184,9 +187,7 @@ export function AudioPlayer({
         <source src={src} type={mimeType} />
         {t('audio.unsupported')}
       </audio>
-      <p className="text-[10px] text-slate-400 mt-1">
-        {t('audio.keyboardHint')}
-      </p>
+      <p className="text-[10px] text-slate-400 mt-1">{t('audio.keyboardHint')}</p>
     </div>
   );
 }

@@ -70,12 +70,7 @@ interface LoaderProps {
   title: string;
 }
 
-function SourceLoader({
-  storagePath,
-  sourceType,
-  highlight,
-  title,
-}: LoaderProps) {
+function SourceLoader({ storagePath, sourceType, highlight, title }: LoaderProps) {
   const { t } = useTranslation();
   const { url, loading, error } = useDocumentSource(storagePath);
 

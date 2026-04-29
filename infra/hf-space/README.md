@@ -24,7 +24,7 @@ the `.github/workflows/backend-deploy.yml` workflow will `rsync` only `backend/`
 Go to **Settings → Repository secrets** in the Space and add:
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_KEY`
-- `GROQ_API_KEY` — primary LLM, free tier (build plan A2 §3)
+- `GROQ_API_KEY` — primary LLM, free tier (build plan §3)
 - `GEMINI_API_KEY` — paid-only fallback; leave blank in v1
 - `CORS_ORIGINS` — your Cloudflare Pages URL (e.g. `https://aria.pages.dev`)
 - `SENTRY_DSN_BACKEND` (wired Week 4 Day 22)

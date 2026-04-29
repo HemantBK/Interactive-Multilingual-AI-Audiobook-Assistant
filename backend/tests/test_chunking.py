@@ -35,7 +35,7 @@ def test_skips_tiny_fragments() -> None:
 
 def test_simple_paragraph_yields_one_chunk() -> None:
     text = (
-        "ARIA is a multilingual reader that supports both English and several "
+        "Audiobook-Assistant is a multilingual reader that supports both English and several "
         "Indic languages. Citation Mode highlights the exact passage in the "
         "source for every answer the model produces."
     )

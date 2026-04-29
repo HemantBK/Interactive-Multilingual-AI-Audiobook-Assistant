@@ -1,5 +1,5 @@
 """
-Answer-faithfulness evaluation via ragas (build plan A2 §8 Day 23).
+Answer-faithfulness evaluation via ragas (build plan §8 Day 23).
 
 Metric: faithfulness — fraction of answer claims that are supported by
 the retrieved context. ≥ 0.80 is the v1 target.

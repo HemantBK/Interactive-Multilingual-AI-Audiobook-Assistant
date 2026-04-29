@@ -1,6 +1,6 @@
 # Accessibility test plan
 
-Build plan A2 §23 targets WCAG 2.1 AA. axe-core in CI catches automated
+Build plan §23 targets WCAG 2.1 AA. axe-core in CI catches automated
 issues; this plan covers the manual scenarios CI can't verify (screen
 reader announcements, focus order, keyboard-only operation).
 

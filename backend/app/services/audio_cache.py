@@ -1,5 +1,5 @@
 """
-audio_cache table + Storage helpers (build plan A2 §4, Day 15).
+audio_cache table + Storage helpers (build plan §4, Day 15).
 
   Cache key:  sha256(text|voice_id)
   Storage:    bucket=audio-cache, path=<hash>.<ext>

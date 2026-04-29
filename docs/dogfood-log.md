@@ -1,6 +1,6 @@
 # Dogfood log
 
-Build plan A2 §10 starts dogfooding **Day 14** (today). This file records
+Build plan §10 starts dogfooding **Day 14** (today). This file records
 issues hit during real-world use of ARIA. Triaged daily; product-quality
 bugs become eval items, cosmetic ones get GitHub issues, P0s pause the
 build calendar.

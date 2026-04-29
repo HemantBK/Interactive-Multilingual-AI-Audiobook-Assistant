@@ -6,7 +6,7 @@ frontend picks by language and gender without knowing whether edge-tts or
 Piper is serving the request.
 
 Engine selection is decided per request inside tts.synthesize(), using
-edge-tts as primary and Piper as the license-clean fallback (A2 §3).
+edge-tts as primary and Piper as the license-clean fallback (build plan §3).
 """
 
 from __future__ import annotations

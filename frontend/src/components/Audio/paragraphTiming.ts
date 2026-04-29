@@ -37,10 +37,7 @@ export function splitParagraphs(text: string): string[] {
     .filter((p) => p.length > 0);
 }
 
-export function estimateParagraphDurations(
-  paragraphs: string[],
-  language: string,
-): number[] {
+export function estimateParagraphDurations(paragraphs: string[], language: string): number[] {
   const rate = CHARS_PER_SEC[language] ?? DEFAULT_CHARS_PER_SEC;
   return paragraphs.map((p) => Math.max(0.5, p.length / rate));
 }
@@ -58,10 +55,7 @@ export function rangesFromDurations(durations: number[]): ParagraphRange[] {
  * Scale ranges so the last paragraph's end matches `actualTotalSec`.
  * Used after `loadedmetadata` fires on the audio element.
  */
-export function calibrate(
-  ranges: ParagraphRange[],
-  actualTotalSec: number,
-): ParagraphRange[] {
+export function calibrate(ranges: ParagraphRange[], actualTotalSec: number): ParagraphRange[] {
   if (ranges.length === 0) return ranges;
   const estimated = ranges[ranges.length - 1].end;
   if (!Number.isFinite(actualTotalSec) || actualTotalSec <= 0 || estimated <= 0) {

@@ -3,7 +3,7 @@
 **Operator:** Hemant
 **Contact:** hemantkumar.bk@gmail.com (subject line: `DMCA`)
 
-ARIA respects copyright. If you are a rights-holder and believe a user
+Audiobook-Assistant respects copyright. If you are a rights-holder and believe a user
 has uploaded material that infringes your copyright, send a notice
 including:
 

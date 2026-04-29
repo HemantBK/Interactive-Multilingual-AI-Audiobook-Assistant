@@ -1,5 +1,5 @@
 """
-Golden-set loader + validator (build plan A2 §8, Day 23).
+Golden-set loader + validator (build plan §8, Day 23).
 
 Reads eval/datasets/golden_set.json and yields typed records. Validation
 catches schema drift early — a renamed field in the JSON shouldn't

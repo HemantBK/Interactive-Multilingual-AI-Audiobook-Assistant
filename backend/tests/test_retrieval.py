@@ -15,8 +15,9 @@ def test_format_embedding_basic() -> None:
 def test_format_embedding_preserves_precision() -> None:
     vec = [0.123456789, -0.987654321]
     out = _format_embedding(vec)
-    # 7-digit precision is enough for halfvec (16-bit float)
-    assert "0.1234567" in out
+    # 7-digit precision is enough for halfvec (16-bit float). Python's
+    # f"{v:.7f}" rounds half-to-even, so 0.123456789 → 0.1234568.
+    assert "0.1234568" in out
     assert "-0.9876543" in out
 
 

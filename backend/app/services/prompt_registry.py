@@ -1,5 +1,5 @@
 """
-public.prompts table helpers (build plan A2 §9).
+public.prompts table helpers (build plan §9).
 
 Day 9 registers the baseline rag.system prompt at backend startup,
 idempotently. Existing rows are not overwritten; the first ever insert

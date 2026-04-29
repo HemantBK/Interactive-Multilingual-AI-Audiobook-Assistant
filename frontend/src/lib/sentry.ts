@@ -1,5 +1,5 @@
 /**
- * Sentry init for the SPA (build plan A2 §17 Day 22).
+ * Sentry init for the SPA (build plan §17 Day 22).
  *
  * Sampling: traces 10%, errors 100%. Replays disabled — they're a separate
  * Sentry product with its own quota and we don't need them at v1.
@@ -54,10 +54,7 @@ export function initSentry(): boolean {
   }
 }
 
-export function captureException(
-  error: unknown,
-  context?: Record<string, unknown>,
-): void {
+export function captureException(error: unknown, context?: Record<string, unknown>): void {
   if (!_initialised) return;
   try {
     Sentry.captureException(error, context ? { extra: context } : undefined);

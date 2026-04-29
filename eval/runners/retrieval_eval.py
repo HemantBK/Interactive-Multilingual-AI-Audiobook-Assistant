@@ -1,5 +1,5 @@
 """
-Retrieval evaluation: hit@k, MRR (build plan A2 §8 Day 23).
+Retrieval evaluation: hit@k, MRR (build plan §8 Day 23).
 
 For each retrieval-set golden item:
   1. Embed question via bge-m3 (same model as production).

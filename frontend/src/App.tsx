@@ -11,12 +11,7 @@ import { Footer } from './components/Layout/Footer';
 import { Dropzone } from './components/Upload/Dropzone';
 import { useAuth } from './hooks/useAuth';
 import { useDocuments } from './hooks/useDocuments';
-import type {
-  ChunkRef,
-  Citation,
-  CitationJump,
-  DocumentSummary,
-} from './types';
+import type { ChunkRef, Citation, CitationJump, DocumentSummary } from './types';
 
 const LANGS = [
   { code: 'en', label: 'English' },
@@ -128,12 +123,9 @@ export default function App() {
     setHighlight(null);
   }, []);
 
-  const handleCitationJump = useCallback(
-    (citation: Citation, chunk: ChunkRef | undefined) => {
-      setHighlight({ citation, chunk, nonce: Date.now() });
-    },
-    [],
-  );
+  const handleCitationJump = useCallback((citation: Citation, chunk: ChunkRef | undefined) => {
+    setHighlight({ citation, chunk, nonce: Date.now() });
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -169,10 +161,7 @@ export default function App() {
             <aside className="space-y-4">
               <Dropzone accessToken={accessToken} onUploaded={docs.refresh} />
               <section aria-labelledby="documents-heading">
-                <h2
-                  id="documents-heading"
-                  className="text-sm font-bold mb-2 text-slate-700"
-                >
+                <h2 id="documents-heading" className="text-sm font-bold mb-2 text-slate-700">
                   {t('documents.heading')}
                 </h2>
                 <DocumentList
@@ -197,10 +186,7 @@ export default function App() {
                 </h2>
                 <div className="flex-1 min-h-0">
                   <ErrorBoundary>
-                    <DocumentViewer
-                      document={selectedDoc}
-                      highlight={highlight}
-                    />
+                    <DocumentViewer document={selectedDoc} highlight={highlight} />
                   </ErrorBoundary>
                 </div>
               </section>
@@ -208,10 +194,7 @@ export default function App() {
                 aria-labelledby="chat-heading"
                 className="min-h-[400px] xl:min-h-[600px] flex flex-col"
               >
-                <h2
-                  id="chat-heading"
-                  className="text-sm font-bold mb-2 text-slate-700"
-                >
+                <h2 id="chat-heading" className="text-sm font-bold mb-2 text-slate-700">
                   {t('chat.heading')}
                 </h2>
                 <div className="flex-1">

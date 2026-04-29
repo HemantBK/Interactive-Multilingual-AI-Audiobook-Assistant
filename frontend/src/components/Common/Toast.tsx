@@ -10,7 +10,7 @@ import {
 import { useTranslation } from 'react-i18next';
 
 /**
- * Minimal in-house toast system (build plan A2 §12 Day 19).
+ * Minimal in-house toast system (build plan §12 Day 19).
  *
  * Why not pull `react-hot-toast` / `sonner`: ~80 lines avoids another
  * 3rd-party dep + license vetting. Same UX shape, less surface.
@@ -106,13 +106,7 @@ function ToastContainer({
   );
 }
 
-function ToastItem({
-  toast,
-  onDismiss,
-}: {
-  toast: Toast;
-  onDismiss: () => void;
-}) {
+function ToastItem({ toast, onDismiss }: { toast: Toast; onDismiss: () => void }) {
   const { t } = useTranslation();
   // Mount-time fade-in; CSS keeps the markup tiny.
   const [visible, setVisible] = useState(false);

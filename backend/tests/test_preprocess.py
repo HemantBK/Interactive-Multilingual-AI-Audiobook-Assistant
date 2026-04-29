@@ -54,7 +54,8 @@ def test_strips_page_numbers() -> None:
 def test_strips_running_header_across_pages() -> None:
     boilerplate = "Confidential — ARIA Internal"
     pages = [
-        f"{boilerplate}\nUnique content for page {i} that is long enough to be kept after preprocess."
+        f"{boilerplate}\nUnique content for page {i}"
+        " that is long enough to be kept after preprocess."
         for i in range(8)
     ]
     doc = _make_doc(pages)

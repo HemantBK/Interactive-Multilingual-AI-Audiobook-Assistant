@@ -1,5 +1,5 @@
 """
-30-payload prompt-injection regression suite (build plan A2 §14, Day 13).
+30-payload prompt-injection regression suite (build plan §14, Day 13).
 
 Three layers of defense, three layers of tests:
 

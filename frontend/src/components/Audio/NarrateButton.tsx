@@ -46,9 +46,7 @@ export function NarrateButton({
   onStop,
 }: Props) {
   const { t } = useTranslation();
-  const [voiceId, setVoiceId] = useState(() =>
-    defaultVoiceIdForLanguage(languageHint ?? null),
-  );
+  const [voiceId, setVoiceId] = useState(() => defaultVoiceIdForLanguage(languageHint ?? null));
   const [audio, setAudio] = useState<AudioState | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -119,11 +117,7 @@ export function NarrateButton({
             {audio.cached && <span>{t('audio.cached')}</span>}
             {audio.fallbackUsed && <span>· {t('audio.fallback')}</span>}
           </div>
-          <button
-            type="button"
-            onClick={handleStop}
-            className="text-slate-600 underline"
-          >
+          <button type="button" onClick={handleStop} className="text-slate-600 underline">
             {t('audio.stop')}
           </button>
         </div>

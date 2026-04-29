@@ -1,6 +1,6 @@
 # Day 26 — security review pass
 
-Build plan A2 §6 + §26. Single-day audit before private beta (Day 28
+Build plan §6 + §26. Single-day audit before private beta (Day 28
 launch). Re-run before any public-launch milestone.
 
 ## Reviewer

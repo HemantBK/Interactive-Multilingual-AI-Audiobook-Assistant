@@ -1,4 +1,4 @@
-# ARIA Backend — Python dependencies (Build Plan A2)
+# Audiobook-Assistant backend — Python dependencies (build plan)
 # Pin minor versions; only upgrade via PRs that run the eval suite.
 # Day 1: web framework + reliability + supabase. Feature-specific deps land
 # as each feature ships, to keep the HF Spaces image slim.
@@ -18,7 +18,7 @@ httpx==0.27.2
 # --- Structured logging ---
 structlog==24.4.0
 
-# --- Reliability (retries + circuit breakers) — A2 §11 ---
+# --- Reliability (retries + circuit breakers) — build plan §11 ---
 tenacity==9.0.0
 pybreaker==1.2.0
 
@@ -47,7 +47,7 @@ langchain-text-splitters==0.3.4
 groq==0.13.0
 
 # --- TTS (Week 3 Day 15) ---
-edge-tts==6.1.20
+edge-tts==6.1.19
 piper-tts==1.2.0
 
 # --- Observability (Week 4 Day 22) ---

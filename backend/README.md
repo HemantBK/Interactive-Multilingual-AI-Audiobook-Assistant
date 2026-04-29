@@ -1,5 +1,5 @@
 ---
-title: ARIA API
+title: Interactive Audiobook-Assistant API
 emoji: 📚
 colorFrom: orange
 colorTo: yellow
@@ -9,9 +9,9 @@ pinned: false
 license: apache-2.0
 ---
 
-# ARIA Backend
+# Interactive Audiobook-Assistant — backend
 
-FastAPI backend for ARIA. Deploys to **Hugging Face Spaces** (Docker SDK) and runs locally against the same image.
+FastAPI backend for Interactive Audiobook-Assistant. Deploys to **Hugging Face Spaces** (Docker SDK) and runs locally against the same image.
 
 The YAML block above is read by Hugging Face Spaces to configure this Space. It is ignored by GitHub's Markdown renderer (rendered as page metadata).
 

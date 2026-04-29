@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { consentDecision, denyConsent, grantConsent } from '../../lib/analytics';
 
 /**
- * One-time analytics consent banner (build plan A2 §26 Day 25).
+ * One-time analytics consent banner (build plan §26 Day 25).
  *
  * Shows on first visit while `aria.analytics-consent` localStorage key
  * is unset. Choice persists; banner does not reappear unless the user
@@ -41,9 +41,7 @@ export function ConsentBanner() {
       aria-label={t('consent.regionLabel')}
       className="fixed inset-x-2 bottom-2 z-40 mx-auto max-w-3xl rounded border border-slate-300 bg-white shadow-md p-3 flex flex-col gap-2 sm:flex-row sm:items-center"
     >
-      <p className="text-sm text-slate-700 flex-1">
-        {t('consent.message')}
-      </p>
+      <p className="text-sm text-slate-700 flex-1">{t('consent.message')}</p>
       <div className="flex gap-2 shrink-0">
         <button
           type="button"

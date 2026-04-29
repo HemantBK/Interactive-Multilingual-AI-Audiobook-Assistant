@@ -1,5 +1,5 @@
 """
-Groq Llama 3.3 70B streaming client (build plan A2 §3, §11).
+Groq Llama 3.3 70B streaming client (build plan §3, §11).
 
 Reliability layers (innermost → outermost):
   1. Tenacity retries — 1 try + 2 retries, 0.5 s / 1 s / 2 s exponential.

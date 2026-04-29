@@ -18,13 +18,7 @@ interface Props {
   onSelect?: (doc: DocumentSummary) => void;
 }
 
-export function DocumentList({
-  documents,
-  loading,
-  error,
-  selectedId,
-  onSelect,
-}: Props) {
+export function DocumentList({ documents, loading, error, selectedId, onSelect }: Props) {
   const { t } = useTranslation();
 
   if (loading) {
@@ -46,10 +40,7 @@ export function DocumentList({
   }
 
   return (
-    <ul
-      className="divide-y divide-slate-200 border border-slate-200 rounded bg-white"
-      role="list"
-    >
+    <ul className="divide-y divide-slate-200 border border-slate-200 rounded bg-white" role="list">
       {documents.map((d) => {
         const selected = selectedId === d.id;
         const clickable = onSelect != null && d.status === 'ready';

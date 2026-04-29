@@ -48,4 +48,4 @@ sentence, the right doc is one click away.
 
 ## I'm reviewing the **plan**
 
-→ [../build plan A2.md](../build%20plan%20A2.md) — the only active plan
+→ [../build plan.md](../build%20plan.md) — the only active plan

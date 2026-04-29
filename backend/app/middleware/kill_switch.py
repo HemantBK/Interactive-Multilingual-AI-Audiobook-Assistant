@@ -1,5 +1,5 @@
 """
-KILL_SWITCH middleware (build plan A2 §6, §17, Day 18).
+KILL_SWITCH middleware (build plan §6, §17, Day 18).
 
 When `settings.kill_switch=True`, every AI / data-mutation endpoint
 returns 503 immediately. Auth, /health, /, and read-only document GETs
@@ -27,13 +27,11 @@ _GATED_MUTATION_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 
 
 def _is_gated(method: str, path: str) -> bool:
-    if any(path == p or path.startswith(p + "/") or path == p for p in _GATED_PREFIXES_ANY_METHOD):
+    if any(path == p or path.startswith(p + "/") for p in _GATED_PREFIXES_ANY_METHOD):
         return True
-    if method in _GATED_MUTATION_METHODS and any(
+    return method in _GATED_MUTATION_METHODS and any(
         path == p or path.startswith(p + "/") for p in _GATED_MUTATION_PREFIXES
-    ):
-        return True
-    return False
+    )
 
 
 async def kill_switch_middleware(request: Request, call_next):
@@ -42,7 +40,7 @@ async def kill_switch_middleware(request: Request, call_next):
             status_code=503,
             content={
                 "detail": (
-                    "ARIA is temporarily disabled by the operator. "
+                    "The service is temporarily disabled by the operator. "
                     "Please try again in a few minutes."
                 ),
                 "code": "kill_switch_active",

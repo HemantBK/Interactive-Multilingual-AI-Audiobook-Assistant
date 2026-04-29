@@ -11,7 +11,6 @@ from app.services.uploads import (
     detect_source_type,
 )
 
-
 # ---------- size ----------
 
 def test_assert_size_accepts_small() -> None:
@@ -73,7 +72,7 @@ def test_detect_unsupported_mime() -> None:
 
 
 def test_detect_text_utf8_accepts_indic() -> None:
-    source, _, _ = detect_source_type("नमस्ते दुनिया".encode("utf-8"), "text/plain")
+    source, _, _ = detect_source_type("नमस्ते दुनिया".encode(), "text/plain")
     assert source == "text"
 
 

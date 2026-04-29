@@ -3,12 +3,10 @@ is what we care about, not the round-trip."""
 
 from __future__ import annotations
 
-from typing import Any
 from unittest.mock import MagicMock
 
 import pytest
 
-from app.services import quotas
 from app.services.quotas import (
     CAP_BY_COUNTER,
     QuotaExceededError,

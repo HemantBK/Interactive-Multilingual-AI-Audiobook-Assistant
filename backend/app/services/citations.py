@@ -1,5 +1,5 @@
 """
-Citation validation (build plan A2 §2 — "Backend validates citations actually
+Citation validation (build plan §2 — "Backend validates citations actually
 exist in retrieved chunks").
 
 A citation is valid iff:
@@ -52,17 +52,18 @@ def validate_citations(
             continue
 
         chunk_text = text_by_id.get(chunk_id, "")
-        if quote not in chunk_text:
-            # Fallback: normalise whitespace before declaring failure.
-            if " ".join(quote.split()) not in " ".join(chunk_text.split()):
-                dropped.append(
-                    {
-                        "chunk_id": chunk_id,
-                        "quote": quote[:80],
-                        "reason": "quote_not_substring",
-                    }
-                )
-                continue
+        # Fallback: normalise whitespace before declaring failure.
+        if quote not in chunk_text and " ".join(quote.split()) not in " ".join(
+            chunk_text.split()
+        ):
+            dropped.append(
+                {
+                    "chunk_id": chunk_id,
+                    "quote": quote[:80],
+                    "reason": "quote_not_substring",
+                }
+            )
+            continue
 
         valid.append({"chunk_id": chunk_id, "quote": quote})
 

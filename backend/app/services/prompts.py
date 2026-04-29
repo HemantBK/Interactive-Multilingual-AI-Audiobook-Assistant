@@ -6,7 +6,7 @@ identifiers reserved for forward compatibility).
 
 Day 9: these constants get written to the `public.prompts` table on startup
 so prompt-iteration A/B tests can flip `is_active` without a code deploy
-(build plan A2 §9). Day 33 wires the iteration runner.
+(build plan §9). Day 33 wires the iteration runner.
 
 Prompt-injection defense: chunk text is wrapped in <chunk id="..."> tags.
 The system prompt explicitly tells the model to treat chunk content as
@@ -52,16 +52,18 @@ def build_rag_prompt(
     tags carrying both the chunk id and page number — the model needs both
     to produce valid citations and to give the user a "jump to page" hint.
     """
-    chunk_lines: list[str] = []
-    for c in chunks:
-        chunk_lines.append(
+    if chunks:
+        chunk_lines = [
             f'<chunk id="{c["id"]}" page="{c["page_number"]}">\n'
             f'{c.get("text", "")}\n'
             f"</chunk>"
-        )
-    chunks_block = "\n\n".join(chunk_lines)
+            for c in chunks
+        ]
+        context_block = "<chunks>\n" + "\n\n".join(chunk_lines) + "\n</chunks>"
+    else:
+        context_block = "(no relevant context retrieved)"
 
-    user_content = f"<chunks>\n{chunks_block}\n</chunks>\n\nQuestion: {question}"
+    user_content = f"{context_block}\n\nQuestion: {question}"
 
     return [
         {"role": "system", "content": SYSTEM_PROMPT},

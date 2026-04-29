@@ -11,7 +11,7 @@ hierarchy because most Indic source uses it for parenthetical asides only.
 
 Chunks carry citation anchors (page_number, char_start, char_end) and the
 union of word bboxes whose offsets fall inside the chunk's char range.
-500-char chunks with 50-char overlap (build plan A2 §2).
+500-char chunks with 50-char overlap (build plan §2).
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ from dataclasses import dataclass
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from app.services.extraction import ExtractedDocument, ExtractedPage, WordBox
+from app.services.extraction import ExtractedDocument, WordBox
 
 CHUNK_CHAR_SIZE = 500
 CHUNK_CHAR_OVERLAP = 50
@@ -107,20 +107,23 @@ def chunk_document(doc: ExtractedDocument) -> list[Chunk]:
 
     chunks: list[Chunk] = []
     chunk_index = 0
-    seen_text_hashes: set[str] = set()
 
     for page in doc.pages:
         if not page.text.strip():
             continue
 
         word_offsets = _walk_word_offsets(page.text, page.words) if page.words else []
+        # Defensive dedup is page-scoped — boilerplate stripping (preprocess)
+        # handles cross-page repetition; identical content on different pages
+        # is legitimate (forms, repeated sections) and must keep its own
+        # citation anchor per page.
+        seen_text_hashes: set[str] = set()
 
         for piece in splitter.split_text(page.text):
             piece = piece.strip()
             if len(piece) < 30:  # skip tiny noise fragments
                 continue
 
-            # Defensive dedup — boilerplate strip should have caught most of this
             piece_key = piece[:200]
             if piece_key in seen_text_hashes:
                 continue

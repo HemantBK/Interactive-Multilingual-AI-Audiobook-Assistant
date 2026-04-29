@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "ARIA",
+    "name": "Interactive Audiobook-Assistant",
     "tagline": "Multilingual AI reader with precise citations"
   },
   "auth": {

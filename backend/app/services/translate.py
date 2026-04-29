@@ -10,7 +10,7 @@ The translation_cache table has no user-facing RLS policy — it's a global
 cache accessed by the backend's service-role key only. A privacy note in
 docs/SECURITY.md (Day 25) covers what this implies for user-uploaded text.
 
-Supported targets: 14 languages per build plan A2 §1. The set is closed —
+Supported targets: 14 languages per build plan §1. The set is closed —
 unknown codes return ValueError.
 """
 
@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 MAX_TEXT_CHARS: Final = 8000
 
-# 14 target languages (build plan A2 §1).
+# 14 target languages (build plan §1).
 SUPPORTED_LANGUAGES: Final[dict[str, str]] = {
     "en": "English",
     "hi": "Hindi",

@@ -1,5 +1,5 @@
 /**
- * PostHog event tracking with consent gating (build plan A2 §17 + §26
+ * PostHog event tracking with consent gating (build plan §17 + §26
  * Day 22 / Day 25).
  *
  * Storage: PostHog uses localStorage (no cookies). Day 25 ConsentBanner
@@ -16,8 +16,7 @@ import posthog from 'posthog-js';
 
 const apiKey = import.meta.env.VITE_POSTHOG_API_KEY as string | undefined;
 const apiHost =
-  (import.meta.env.VITE_POSTHOG_HOST as string | undefined) ??
-  'https://us.i.posthog.com';
+  (import.meta.env.VITE_POSTHOG_HOST as string | undefined) ?? 'https://us.i.posthog.com';
 
 export const CONSENT_STORAGE_KEY = 'aria.analytics-consent';
 
@@ -95,10 +94,7 @@ export function denyConsent(): void {
   }
 }
 
-export function consentDecision():
-  | 'granted'
-  | 'denied'
-  | 'pending' {
+export function consentDecision(): 'granted' | 'denied' | 'pending' {
   if (typeof window === 'undefined') return 'pending';
   try {
     const v = window.localStorage.getItem(CONSENT_STORAGE_KEY);
@@ -127,10 +123,7 @@ export function reset(): void {
   }
 }
 
-export function track(
-  event: string,
-  properties: Record<string, unknown> = {},
-): void {
+export function track(event: string, properties: Record<string, unknown> = {}): void {
   if (!_initialised || !_hasConsent()) return;
   try {
     posthog.capture(event, properties);

@@ -1,6 +1,6 @@
 # UI states inventory
 
-Build plan A2 §12 requires three states on every fetch: empty, loading,
+Build plan §12 requires three states on every fetch: empty, loading,
 error. Day 19 audited and filled gaps; this file is the running checklist.
 Day 21 a11y deep pass verifies that each state announces correctly.
 

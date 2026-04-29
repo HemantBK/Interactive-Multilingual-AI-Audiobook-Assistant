@@ -1,5 +1,5 @@
 -- =============================================================================
--- ARIA — search_chunks RPC (build plan A2 Day 8)
+-- ARIA — search_chunks RPC (build plan Day 8)
 --
 -- pgvector cosine similarity over halfvec(1024). Caller passes the query
 -- vector as a `[v1,v2,...]` text literal; the function casts to halfvec.

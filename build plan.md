@@ -1,6 +1,6 @@
-# ARIA — Build Plan A2 (v1, all-tracks)
+# Interactive Audiobook-Assistant — Build Plan (v1, all-tracks)
 
-> **Supersedes [build plan A.md](build%20plan%20A.md).** Same product, same stack, same moat. Extends to cover all 21 production-AI lifecycle items from your audit + 6 cross-cutting tracks (i18n, a11y, DR, capacity, legal, onboarding) we caught.
+> Same product, same stack, same moat as the v1 charter. Covers all 21 production-AI lifecycle items + 6 cross-cutting tracks (i18n, a11y, DR, capacity, legal, onboarding). Earlier drafts (`PLAN.md`, `build plan A.md`) deleted Day 26; recoverable via git history.
 >
 > **Timeline: 6 weeks, not 4.** Solo + new-to-AI + 27 tracks → realistic with you delegating code work to Claude. If you must do 4 weeks, see §29 ("What we cut").
 >

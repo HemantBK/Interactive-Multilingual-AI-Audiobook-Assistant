@@ -1,20 +1,20 @@
-# ADR 0001 — Stack choice (Build Plan A2)
+# ADR 0001 — Stack choice
 
 - **Date**: 2026-04-28
 - **Status**: Accepted
 - **Deciders**: Hemant
-- **Supersedes**: earlier `PLAN.md` and `build plan A.md` drafts (deleted; superseded by `build plan A2.md`)
+- **Supersedes**: earlier `PLAN.md` and `build plan A.md` drafts (deleted; superseded by `build plan.md`)
 
 ## Context
 
-ARIA is a multilingual AI reader for books and PDFs with precise citations and native-quality Indic TTS. v1 must be free at < 50 DAU, license-clean, and upgradeable as users / money arrive.
+Audiobook-Assistant is a multilingual AI reader for books and PDFs with precise citations and native-quality Indic TTS. v1 must be free at < 50 DAU, license-clean, and upgradeable as users / money arrive.
 
 Two earlier plans had blocking issues (both deleted from the repo as of Day 26 — git history retains them):
 
 - **PLAN.md (initial)** chose PyMuPDF (AGPL-3.0 — conflicts with our Apache-2.0 promise) and free Gemini API for everything (free Gemini ToS allows training on inputs — conflicts with the "no training on user data" promise).
 - **build plan A.md (interim)** fixed those two but missed 16 production-lifecycle items (idempotency, prompt versioning, DR, capacity planning, i18n, a11y, etc.).
 
-`build plan A2.md` resolves both by locking the stack below and addressing all 27 lifecycle items.
+`build plan.md` resolves both by locking the stack below and addressing all 27 lifecycle items.
 
 ## Decision
 
@@ -76,5 +76,5 @@ Two earlier plans had blocking issues (both deleted from the repo as of Day 26 �
 
 ## References
 
-- [build plan A2.md](../../build%20plan%20A2.md) §3 (locked stack), §0 (delta vs A), §15 (CI license guard).
+- [build plan.md](../../build%20plan.md) §3 (locked stack), §0 (delta vs A), §15 (CI license guard).
 - Earlier drafts (`PLAN.md`, `build plan A.md`) — deleted Day 26; recoverable via `git log -- PLAN.md "build plan A.md"`.

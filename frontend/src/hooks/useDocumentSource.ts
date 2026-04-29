@@ -22,9 +22,7 @@ export interface UseDocumentSourceResult {
   error: string | null;
 }
 
-export function useDocumentSource(
-  storagePath: string | null,
-): UseDocumentSourceResult {
+export function useDocumentSource(storagePath: string | null): UseDocumentSourceResult {
   const [url, setUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(storagePath != null);
   const [error, setError] = useState<string | null>(null);

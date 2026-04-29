@@ -40,7 +40,7 @@ correlation), payment info (no payments), location, contacts, biometrics.
 
 | Data | Retention |
 |---|---|
-| Documents (uploaded files + derived chunks) | **14 days** unless you opt-in to keepalive (build plan A2 §1) |
+| Documents (uploaded files + derived chunks) | **14 days** unless you opt-in to keepalive (build plan §1) |
 | Conversations | 14 days (matches doc retention) |
 | Audit log | 30 days |
 | Usage counters | 365 days for billing analytics |
@@ -56,7 +56,7 @@ We do **not** sell your data. We share it only with the providers above
 - **Groq** sees the document chunks we send for RAG / translation.
 - **Supabase** stores everything but the LLM payloads.
 - We do **not** send user content to free-tier Gemini (its terms allow
-  training on inputs). See the build plan A2 §3.
+  training on inputs). See the build plan §3.
 
 ## 5. Your rights (DPDP / GDPR)
 
@@ -74,7 +74,7 @@ Erasure is irreversible and runs immediately. We don't keep tombstone rows.
 
 ## 6. Security
 
-- All third-party API keys server-side only (build plan A2 §6).
+- All third-party API keys server-side only (build plan §6).
 - Row-Level Security on every user-facing table.
 - HTTPS + HSTS (`max-age=63072000; includeSubDomains; preload`).
 - CSP that blocks inline scripts (Day 13).
@@ -90,7 +90,7 @@ If you decline, no analytics-side storage is set.
 
 ## 8. Children
 
-ARIA is not directed at children under 13 (US) / 18 (India DPDP).
+Audiobook-Assistant is not directed at children under 13 (US) / 18 (India DPDP).
 If you believe a child has signed up, email us and we'll erase the account.
 
 ## 9. Breach notification

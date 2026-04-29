@@ -82,13 +82,28 @@ export function Footer({ accessToken, onSignedOut }: Props) {
     <footer className="border-t border-slate-200 bg-white px-4 py-3 mt-6">
       <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-600">
         <nav aria-label={t('footer.legalNav')} className="flex flex-wrap gap-3">
-          <a href={privacyUrl} className="hover:text-slate-900 underline" target="_blank" rel="noopener noreferrer">
+          <a
+            href={privacyUrl}
+            className="hover:text-slate-900 underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {t('footer.privacy')}
           </a>
-          <a href={termsUrl} className="hover:text-slate-900 underline" target="_blank" rel="noopener noreferrer">
+          <a
+            href={termsUrl}
+            className="hover:text-slate-900 underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {t('footer.terms')}
           </a>
-          <a href={dmcaUrl} className="hover:text-slate-900 underline" target="_blank" rel="noopener noreferrer">
+          <a
+            href={dmcaUrl}
+            className="hover:text-slate-900 underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {t('footer.dmca')}
           </a>
         </nav>

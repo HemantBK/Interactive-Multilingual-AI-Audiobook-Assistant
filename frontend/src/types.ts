@@ -3,12 +3,7 @@
  * in infra/supabase/migrations/0001_initial_schema.sql — keep them aligned.
  */
 
-export type DocumentStatus =
-  | 'queued'
-  | 'uploading'
-  | 'processing'
-  | 'ready'
-  | 'failed';
+export type DocumentStatus = 'queued' | 'uploading' | 'processing' | 'ready' | 'failed';
 
 export type SourceType = 'pdf' | 'image' | 'text';
 

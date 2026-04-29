@@ -1,4 +1,4 @@
-# Eval harness dependencies (build plan A2 §8 + Day 23).
+# Eval harness dependencies (build plan §8 + Day 23).
 #
 # Sits alongside backend/requirements.txt — eval imports backend services
 # (embedding, retrieval, rerank, prompts) so backend deps must already be

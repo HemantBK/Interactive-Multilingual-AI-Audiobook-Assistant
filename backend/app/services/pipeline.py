@@ -8,7 +8,7 @@ CPU-bound work (pdfplumber, Tesseract, bge-m3) runs via asyncio.to_thread
 so the FastAPI event loop stays responsive for /health and other reads
 while a doc is being indexed. On HF Spaces' single worker, only one
 indexing job runs at a time — surplus uploads sit in the documents table
-with status='queued' (build plan A2 §2 documents the limit).
+with status='queued' (build plan §2 documents the limit).
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from app.db.supabase import user_client
 from app.services import storage
@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 
 
 def _now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 async def run_indexing(doc_id: uuid.UUID, access_token: str) -> None:

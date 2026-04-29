@@ -2,12 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 
-import type {
-  AssistantMessage,
-  ChatMessage,
-  ChunkRef,
-  Citation,
-} from '../../types';
+import type { AssistantMessage, ChatMessage, ChunkRef, Citation } from '../../types';
 import { NarrateButton } from '../Audio/NarrateButton';
 import { splitParagraphs } from '../Audio/paragraphTiming';
 import { CitationCard } from './CitationCard';
@@ -103,10 +98,7 @@ function SafeMarkdown({
       lang={lang ?? undefined}
       className="prose prose-sm max-w-none [&>p]:mb-2 [&>p:last-child]:mb-0 [&>ul]:mb-2 [&>ol]:mb-2"
     >
-      <ReactMarkdown
-        disallowedElements={DISALLOWED_MARKDOWN_TAGS}
-        unwrapDisallowed
-      >
+      <ReactMarkdown disallowedElements={DISALLOWED_MARKDOWN_TAGS} unwrapDisallowed>
         {children}
       </ReactMarkdown>
     </div>
@@ -158,13 +150,8 @@ function AssistantBubble({
 
   // The text + language presented to TTS depends on whether we have a translation.
   const narratedText = translation ? translation.text : message.text;
-  const narratedLanguageHint = translation
-    ? translation.langCode
-    : documentLanguageHint ?? null;
-  const paragraphs = useMemo(
-    () => splitParagraphs(narratedText),
-    [narratedText],
-  );
+  const narratedLanguageHint = translation ? translation.langCode : (documentLanguageHint ?? null);
+  const paragraphs = useMemo(() => splitParagraphs(narratedText), [narratedText]);
 
   if (message.status === 'streaming' && !message.text) {
     return (
@@ -212,14 +199,10 @@ function AssistantBubble({
             <p className="text-[11px] text-slate-500 mb-1">
               {t('chat.translate.heading', { lang: translation.langLabel })}
               {translation.cached && (
-                <span className="ml-2 text-slate-400">
-                  · {t('chat.translate.cached')}
-                </span>
+                <span className="ml-2 text-slate-400">· {t('chat.translate.cached')}</span>
               )}
             </p>
-            <SafeMarkdown lang={translationLang}>
-              {translation.text}
-            </SafeMarkdown>
+            <SafeMarkdown lang={translationLang}>{translation.text}</SafeMarkdown>
           </div>
         )}
 

@@ -1,5 +1,5 @@
 """
-Per-user daily usage quotas (build plan A2 §6, §11, Day 18).
+Per-user daily usage quotas (build plan §6, §11, Day 18).
 
   Counters live in user_usage_daily.{documents_uploaded, pages_processed,
                                      tts_chars, rag_queries}
@@ -21,6 +21,7 @@ v2, swap to a single bump+rollback pattern.
 from __future__ import annotations
 
 import logging
+from datetime import UTC
 from typing import Final, Literal
 
 from fastapi import HTTPException, status
@@ -55,9 +56,9 @@ class QuotaExceededError(HTTPException):
 
 
 def _today_iso() -> str:
-    from datetime import datetime, timezone
+    from datetime import datetime
 
-    return datetime.now(timezone.utc).date().isoformat()
+    return datetime.now(UTC).date().isoformat()
 
 
 def _read_current(db: Client, user_id: str, counter: Counter) -> int:

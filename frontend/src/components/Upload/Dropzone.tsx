@@ -27,7 +27,7 @@ export function Dropzone({ accessToken, onUploaded }: DropzoneProps) {
       const res = await createDocument(file, file.name, accessToken, idempotencyKey);
       await onUploaded();
       // Persistent context-bound state stays inline; transient confirmation
-      // pops as a toast (build plan A2 §12 Day 19).
+      // pops as a toast (build plan §12 Day 19).
       toast.success(t('upload.successToast', { name: file.name }));
       track('document.uploaded', {
         source_type: res.source_type,

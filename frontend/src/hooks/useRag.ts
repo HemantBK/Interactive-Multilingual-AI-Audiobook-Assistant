@@ -1,5 +1,5 @@
 /**
- * RAG state machine + SSE consumer (build plan A2 §12 + Day 10).
+ * RAG state machine + SSE consumer (build plan §12 + Day 10).
  *
  *  idle        ← initial / after reset
  *    │  ask()
@@ -25,12 +25,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { track } from '../lib/analytics';
 import { ApiError, streamRagAsk } from '../services/api';
-import type {
-  AssistantMessage,
-  ChatMessage,
-  Citation,
-  ChunkRef,
-} from '../types';
+import type { AssistantMessage, ChatMessage, Citation, ChunkRef } from '../types';
 
 export type RagPhase = 'idle' | 'asking' | 'streaming' | 'done' | 'error';
 
@@ -53,16 +48,11 @@ export function useRag(accessToken: string | null): UseRagResult {
   // Always abort an in-flight stream on unmount.
   useEffect(() => () => abortRef.current?.abort(), []);
 
-  const updateAssistant = useCallback(
-    (id: string, patch: Partial<AssistantMessage>) => {
-      setMessages((prev) =>
-        prev.map((m) =>
-          m.role === 'assistant' && m.id === id ? { ...m, ...patch } : m,
-        ),
-      );
-    },
-    [],
-  );
+  const updateAssistant = useCallback((id: string, patch: Partial<AssistantMessage>) => {
+    setMessages((prev) =>
+      prev.map((m) => (m.role === 'assistant' && m.id === id ? { ...m, ...patch } : m)),
+    );
+  }, []);
 
   const reset = useCallback(() => {
     abortRef.current?.abort();
@@ -113,12 +103,7 @@ export function useRag(accessToken: string | null): UseRagResult {
       });
 
       try {
-        for await (const ev of streamRagAsk(
-          documentId,
-          trimmed,
-          accessToken,
-          controller.signal,
-        )) {
+        for await (const ev of streamRagAsk(documentId, trimmed, accessToken, controller.signal)) {
           if (ev.event === 'start') {
             setPhase('streaming');
           } else if (ev.event === 'answer') {

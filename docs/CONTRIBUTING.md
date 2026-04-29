@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for considering it. ARIA is a solo-operator project at v1, so
+Thanks for considering it. This is a solo-operator project at v1, so
 the workflow is light — but the gates are real.
 
 ## Before you open a PR
@@ -62,7 +62,7 @@ For non-trivial decisions (new vendor, swap a library, change a load-bearing pat
 
 | Level | What to add |
 |---|---|
-| Pure-function | Always. ~135 unit tests today (build plan A2 §14). |
+| Pure-function | Always. ~135 unit tests today (build plan §14). |
 | HTTP-level smoke | At minimum: 401 without token + 422 on bad payload. |
 | Contract (schemathesis) | Auto-runs against your new endpoint via `test_contract.py`; declare 401 / 422 in `responses=` to keep the fuzzer green. |
 | Integration | Marker `@pytest.mark.integration`; runs only with `RUN_INTEGRATION=1`. |

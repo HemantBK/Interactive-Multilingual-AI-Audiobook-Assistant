@@ -6,9 +6,10 @@ import { BboxOverlay } from './BboxOverlay';
 interface Props {
   src: string;
   highlight: CitationJump | null;
+  alt?: string;
 }
 
-export default function ImageViewer({ src, highlight }: Props) {
+export default function ImageViewer({ src, highlight, alt = '' }: Props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const [naturalWidth, setNaturalWidth] = useState<number | null>(null);
@@ -31,10 +32,8 @@ export default function ImageViewer({ src, highlight }: Props) {
     }
   }, [highlight]);
 
-  const scale =
-    naturalWidth && renderedWidth ? renderedWidth / naturalWidth : 0;
-  const boxes =
-    highlight?.chunk?.bbox?.filter((b) => b.page === 1) ?? [];
+  const scale = naturalWidth && renderedWidth ? renderedWidth / naturalWidth : 0;
+  const boxes = highlight?.chunk?.bbox?.filter((b) => b.page === 1) ?? [];
 
   return (
     <div ref={wrapperRef} className="overflow-y-auto h-full bg-slate-100 p-2">
@@ -42,7 +41,7 @@ export default function ImageViewer({ src, highlight }: Props) {
         <img
           ref={imgRef}
           src={src}
-          alt=""
+          alt={alt}
           onLoad={(e) => {
             const el = e.currentTarget;
             setNaturalWidth(el.naturalWidth);
@@ -50,9 +49,7 @@ export default function ImageViewer({ src, highlight }: Props) {
           }}
           className="max-w-full block"
         />
-        {scale > 0 && boxes.length > 0 && (
-          <BboxOverlay boxes={boxes} scale={scale} />
-        )}
+        {scale > 0 && boxes.length > 0 && <BboxOverlay boxes={boxes} scale={scale} />}
       </div>
     </div>
   );
