@@ -1,6 +1,9 @@
 """POST /tts — synthesize → cache → signed URL. GET /voices — voice catalog."""
 
-from __future__ import annotations
+# NOTE: do NOT add `from __future__ import annotations` here.
+# FastAPI introspects request-body / response models via pydantic's
+# TypeAdapter, which can't resolve PEP 563 stringified forward refs
+# in the function signature.
 
 from typing import Annotated
 

@@ -1,12 +1,19 @@
-# Audiobook-Assistant backend — Python dependencies (build plan)
+# ARIA backend — Python dependencies (build plan)
 # Pin minor versions; only upgrade via PRs that run the eval suite.
 # Day 1: web framework + reliability + supabase. Feature-specific deps land
 # as each feature ships, to keep the HF Spaces image slim.
+#
+# Day 27: CVE-driven bumps (fastapi/starlette, pillow, python-multipart,
+# pdfplumber→pdfminer.six, sentence-transformers→transformers,
+# langchain-text-splitters). See CHANGELOG.
 
 # --- Web framework ---
-fastapi==0.115.4
+fastapi==0.120.4
+# starlette is a fastapi transitive — explicit pin guards the GHSA-2c2j-9gv5-cj73
+# and GHSA-7f5h-v6xp-fcq8 CVEs (fixed in 0.49.1).
+starlette>=0.49.1,<0.50.0
 uvicorn[standard]==0.32.0
-python-multipart==0.0.17
+python-multipart==0.0.26
 
 # --- Validation + settings ---
 pydantic==2.9.2
@@ -19,7 +26,7 @@ httpx==0.27.2
 structlog==24.4.0
 
 # --- Reliability (retries + circuit breakers) — build plan §11 ---
-tenacity==9.0.0
+tenacity==9.1.2
 pybreaker==1.2.0
 
 # --- Rate limiting ---
@@ -29,19 +36,22 @@ slowapi==0.1.9
 supabase==2.9.1
 
 # --- PDF + OCR (Week 1 Day 5) ---
-pdfplumber==0.11.4         # MIT, replaces PyMuPDF (AGPL)
+pdfplumber==0.11.9         # MIT, replaces PyMuPDF (AGPL); pulls pdfminer.six 20251230 (CVE fixes)
 pytesseract==0.3.13
-Pillow==10.4.0
+Pillow==12.2.0             # CVE fixes (GHSA-cfh3-3jmp-rvhc, GHSA-whj4-6x5x-4v2j)
 
 # --- Language detection (Week 1 Day 5) ---
 langdetect==1.0.9
 
 # --- Embeddings + reranker (Week 1 Day 6) ---
 # Loads bge-m3 (1024-dim) and bge-reranker-v2-m3 at runtime via HF cache
-sentence-transformers==3.3.1
+sentence-transformers==5.4.1
+# transformers is a sentence-transformers transitive — explicit pin guards
+# the GHSA-69w3-r845-3855 CVE (fixed in 5.0.0).
+transformers>=5.0.0,<6.0.0
 
 # --- Chunking (Week 1 Day 6) ---
-langchain-text-splitters==0.3.4
+langchain-text-splitters==1.1.2
 
 # --- LLM (Week 2 Day 8) ---
 groq==0.13.0

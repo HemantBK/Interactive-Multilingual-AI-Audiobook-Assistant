@@ -1,6 +1,10 @@
 """POST /translate — Groq + cached, 14 supported target languages."""
 
-from __future__ import annotations
+# NOTE: do NOT add `from __future__ import annotations` here.
+# FastAPI introspects request-body / response models via pydantic's
+# TypeAdapter, which can't resolve PEP 563 stringified forward refs
+# in the function signature — would raise PydanticUndefinedAnnotation
+# at import time.
 
 from typing import Annotated
 

@@ -1,6 +1,10 @@
 """POST /rag/ask — SSE-streamed Q&A over the user's documents."""
 
-from __future__ import annotations
+# NOTE: do NOT add `from __future__ import annotations` here.
+# FastAPI's StreamingResponse return type is introspected via pydantic's
+# TypeAdapter, which can't resolve PEP 563 stringified forward refs to
+# special FastAPI types — would raise PydanticUndefinedAnnotation at
+# import time.
 
 import json
 from typing import Annotated

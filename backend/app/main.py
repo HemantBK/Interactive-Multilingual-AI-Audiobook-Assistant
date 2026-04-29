@@ -86,7 +86,7 @@ app.include_router(user_api.router)
 async def health() -> dict[str, str]:
     return {
         "status": "ok",
-        "service": "audiobook-assistant-api",
+        "service": "aria-api",
         "version": app.version,
         "env": settings.app_env,
         "kill_switch": "on" if settings.kill_switch else "off",

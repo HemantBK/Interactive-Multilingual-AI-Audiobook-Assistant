@@ -9,7 +9,10 @@ user before calling DELETE — backend trusts authenticated callers and
 deletes immediately.
 """
 
-from __future__ import annotations
+# NOTE: do NOT add `from __future__ import annotations` here.
+# The DELETE endpoint returns `fastapi.responses.Response`, which FastAPI
+# introspects via pydantic's TypeAdapter — PEP 563 stringified forward
+# refs to FastAPI special types break pydantic resolution at import time.
 
 import logging
 from datetime import UTC, datetime

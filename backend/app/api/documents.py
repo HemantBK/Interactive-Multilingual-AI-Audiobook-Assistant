@@ -1,6 +1,10 @@
 """POST /documents (upload), GET /documents (list), GET /documents/{id} (one)."""
 
-from __future__ import annotations
+# NOTE: do NOT add `from __future__ import annotations` here.
+# FastAPI introspects `BackgroundTasks` via pydantic's TypeAdapter, which
+# can't resolve forward refs to special FastAPI types. PEP 563 stringified
+# annotations break the @router.post decorator at import time with
+# `PydanticUndefinedAnnotation: name 'BackgroundTasks' is not defined`.
 
 import hashlib
 import uuid
