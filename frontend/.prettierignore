@@ -1,0 +1,9 @@
+dist
+node_modules
+playwright-report
+test-results
+.playwright
+blob-report
+*.lock
+package-lock.json
+src/locales/*.json

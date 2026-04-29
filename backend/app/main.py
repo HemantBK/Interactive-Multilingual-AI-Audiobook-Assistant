@@ -20,6 +20,7 @@ from app.api import documents as documents_api
 from app.api import rag as rag_api
 from app.api import translate as translate_api
 from app.api import tts as tts_api
+from app.api import user as user_api
 from app.core.config import settings
 from app.core.limiter import limiter
 from app.core.observability import init_sentry
@@ -78,6 +79,7 @@ app.include_router(documents_api.router)
 app.include_router(rag_api.router)
 app.include_router(translate_api.router)
 app.include_router(tts_api.router)
+app.include_router(user_api.router)
 
 
 @app.get("/health", tags=["meta"])

@@ -61,6 +61,14 @@ jobs:
         run: |
           echo "${{ secrets.EVAL_DOC_ID_MAP }}" > /tmp/doc_id_by_path.json
 
+      - name: Download last green baseline (for regression gate)
+        if: steps.gate.outputs.go == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: eval-baseline
+          path: /tmp/eval-baseline
+        continue-on-error: true   # first-ever run has no baseline
+
       - name: Run eval
         if: steps.gate.outputs.go == 'true'
         env:
@@ -72,16 +80,35 @@ jobs:
         run: |
           DATE=$(date -u +%Y-%m-%d)
           mkdir -p eval/reports
+          BASELINE=""
+          if [ -f /tmp/eval-baseline/baseline.json ]; then
+            BASELINE="--baseline /tmp/eval-baseline/baseline.json"
+          fi
           python -m eval.runners.cli \
             --dataset eval/datasets/golden_set.json \
             --map /tmp/doc_id_by_path.json \
             --user-id "${{ secrets.EVAL_TEST_USER_ID }}" \
-            --out "eval/reports/${DATE}.json"
+            --out "eval/reports/${DATE}.json" \
+            $BASELINE
 
-      - name: Upload report
+      - name: Upload dated report
         if: steps.gate.outputs.go == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: eval-report
           path: eval/reports/*.json
           retention-days: 30
+
+      - name: Promote to baseline (only on green run)
+        if: steps.gate.outputs.go == 'true' && success()
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          cp "eval/reports/${DATE}.json" /tmp/baseline.json
+      - name: Upload baseline
+        if: steps.gate.outputs.go == 'true' && success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-baseline
+          path: /tmp/baseline.json
+          retention-days: 90
+          overwrite: true

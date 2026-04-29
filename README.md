@@ -1,81 +1,82 @@
 # ARIA
 
-**Automated Reading Interactive Assistant** — a multilingual AI reader for books, PDFs, and images with **precise citations**, native-quality Indic voices, and an interactive Q&A companion.
+**Automated Reading Interactive Assistant** — multilingual AI reader for books, PDFs, and images with **precise citations**, native-quality Indic voices, and a free-at-v1-scale stack.
 
-> **Status:** v1 under construction. See [`PLAN.md`](./PLAN.md) for the 4-week build plan and [`CHANGELOG.md`](./CHANGELOG.md) for what shipped. License: Apache-2.0.
+> Status: v1 in build (~ Phase 4 / 6). Active plan: [`build plan A2.md`](./build%20plan%20A2.md). Shipped artefacts: [`CHANGELOG.md`](./CHANGELOG.md). License: Apache-2.0.
+
+## Why
+
+Mainstream readers (NotebookLM, Speechify, ElevenLabs Reader) treat Indic
+languages as an afterthought. ARIA flips that: general-purpose product,
+**Hindi / Bengali / Marathi / Tamil / Telugu first-class**, **Citation Mode**
+(every answer pinned to the exact source paragraph) as the moat.
 
 ## What it does
 
-- Upload any PDF, image, or text file (≤ 50 MB)
-- Extract text (Tesseract OCR with Gemini Vision fallback)
-- Narrate in **14 languages** with free, native-quality voices (Edge-TTS)
-- Translate between all 14 languages
-- Ask questions in natural language — every answer highlights the **exact source paragraph** with page + character-level citations
+- Upload any **PDF / image / text file** (≤ 50 MB)
+- Extract text — Tesseract OCR primary, Gemini Vision fallback (paid only)
+- Ask questions — Groq Llama 3.3 70B; every answer cites the exact passage
+- Translate — between 14 languages, content-addressable cache
+- Narrate — Edge-TTS (Piper fallback), per-paragraph highlight, keyboard map
 
-## Why it exists
-
-Mainstream readers (NotebookLM, Speechify, ElevenLabs Reader) handle English beautifully but treat Indic languages as an afterthought. ARIA flips that: the core app is general-purpose, but **Hindi, Bengali, Marathi, Tamil, Telugu** are first-class from day one. The differentiator is **Citation Mode** — every claim in a model's answer is anchored to the exact paragraph in your source so you can verify without leaving the page.
-
-## Stack (all free-tier)
-
-| Layer | Tech |
-|---|---|
-| Frontend | React 19 + Vite + Tailwind → Cloudflare Pages |
-| Backend | FastAPI (Python 3.11) → Hugging Face Spaces (Docker) |
-| Database + Auth + Storage + Vectors | Supabase (Postgres + pgvector) |
-| OCR | Tesseract (primary), Gemini Vision (fallback) |
-| TTS | edge-tts (400+ voices, native Indic) |
-| LLM | Gemini 2.5 Flash, Groq Llama fallback |
-| Embeddings | Gemini `text-embedding-004` (768-dim), `bge-m3` local fallback |
-| CI | GitHub Actions |
-
-Full architecture: [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md).
-Security model: [`docs/SECURITY.md`](./docs/SECURITY.md).
-Deploy guide: [`docs/DEPLOY.md`](./docs/DEPLOY.md).
-
-## Repository layout
-
-```
-.
-├── frontend/     # React SPA → Cloudflare Pages
-├── backend/      # FastAPI → Hugging Face Spaces
-├── infra/        # Supabase migrations, HF Space config, Cloudflare headers
-├── eval/         # RAG quality harness
-├── docs/         # Architecture, security, deploy, runbook
-├── memory/       # Session memory (not deployed)
-├── PLAN.md       # 4-week v1 build plan
-├── CHANGELOG.md
-└── LICENSE       # Apache-2.0
-```
-
-## Local development
+## 60-second quickstart
 
 ```bash
-# frontend
-cd frontend
-npm install
-npm run dev              # http://localhost:5173
+git clone <repo-url> aria && cd aria
+cp .env.example .env   # fill in Supabase + Groq keys
 
-# backend (separate terminal)
-cd backend
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+# Backend
+cd backend && python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp ../.env.example ../.env
-# edit ../.env with Supabase + Gemini keys
 uvicorn app.main:app --reload --port 7860
+
+# Frontend (separate terminal)
+cd frontend && npm install && npm run dev
+# → http://localhost:5173
 ```
 
-Then open http://localhost:5173.
+Full guide: [`docs/QUICKSTART.md`](docs/QUICKSTART.md).
 
-## Contributing
+## Documentation
 
-This project is in active early development. If you want to contribute, open an issue first so we can align on scope.
+```
+README.md             ← you are here
+build plan A2.md      ← active 6-week build plan
+CHANGELOG.md          ← shipped per day
+
+docs/
+├── INDEX.md           ← all docs by audience (start here for the deep dive)
+├── QUICKSTART.md      ← run locally in 5 minutes
+├── ARCHITECTURE.md    ← system diagrams, sequence flows, data model
+├── DEPLOY.md          ← CI gates, environments, rollback
+├── RUNBOOK.md         ← incidents + common ops
+├── SECURITY.md        ← threat model, vuln reporting
+├── SLOs.md            ← service-level objectives + error budgets
+├── CONTRIBUTING.md    ← branching, PR checks, ADR process
+├── ui-states.md       ← every fetch's empty/loading/error state
+├── a11y-test-plan.md  ← NVDA / VoiceOver / axe-core checklist
+├── glossary.md        ← RAG, citation, chunk, embedding, …
+├── dogfood-log.md     ← daily issue tracking during build
+├── adr/               ← architectural decision records
+├── legal/             ← privacy, terms, DMCA
+└── security/          ← audit reviews, RLS verification runbook
+```
+
+## Stack (one-line summary)
+
+React 19 + Vite + Tailwind on **Cloudflare Pages**, FastAPI 3.11 on
+**Hugging Face Spaces (Docker)**, Postgres + pgvector + Auth + Storage on
+**Supabase**, **Groq Llama 3.3 70B** for RAG + translate, **bge-m3** local
+embeddings, **bge-reranker-v2-m3** local rerank, **edge-tts + Piper** for
+voice. License-clean (Apache-2.0; CI blocks AGPL/SSPL).
+
+Full table with rationale: [`docs/adr/0001-stack-choice.md`](docs/adr/0001-stack-choice.md).
 
 ## License
 
-[Apache License 2.0](./LICENSE). Includes a patent grant — safe for commercial use with attribution.
+[Apache 2.0](./LICENSE). Patent grant included.
 
-## Contact
+## Security & contact
 
-Security reports → `hemantkumar.bk@gmail.com` with subject `SECURITY`. See [`docs/SECURITY.md`](./docs/SECURITY.md).
+Vulnerabilities → `hemantkumar.bk@gmail.com`, subject `SECURITY`.
+General issues → GitHub Issues.

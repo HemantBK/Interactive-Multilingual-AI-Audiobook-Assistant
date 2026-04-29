@@ -12,8 +12,15 @@
   Permissions-Policy: microphone=(), camera=(), geolocation=(), payment=(), interest-cohort=()
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-site
-  # CSP — Day 2 baseline, kept tight to current dependencies.
-  # script-src includes 'unsafe-eval' only because Tailwind's Play CDN does
-  # JIT compilation in the browser. When we move to compiled Tailwind in
-  # Day 7, drop both 'unsafe-eval' and the cdn.tailwindcss.com origin.
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://*.supabase.co https://*.hf.space wss://*.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
+  # CSP — Day 26 review.
+  #   script-src 'unsafe-eval' is required ONLY by Tailwind Play CDN's
+  #   in-browser JIT. Drop it when we move to compiled Tailwind (Day 38 polish).
+  #   connect-src lists every origin the SPA legitimately fetches from:
+  #     - Supabase REST + Storage + auth + realtime (https + wss)
+  #     - HF Space backend (https://*.hf.space) — also serves /tts signed URLs
+  #     - Sentry ingest (errors + traces)
+  #     - PostHog ingest (events) — declined-consent users still resolve DNS
+  #     - Supabase signed-URL CDN (per-bucket subdomains route through *.supabase.co)
+  #   worker-src 'self' blob: covers the pdfjs worker (vite emits a hashed
+  #     same-origin URL; pdf.js blobs the worker payload internally).
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.hf.space https://*.ingest.sentry.io https://*.sentry.io https://us.i.posthog.com https://eu.i.posthog.com; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';

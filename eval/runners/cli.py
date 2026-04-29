@@ -92,12 +92,68 @@ def fail_on_target_miss(report: dict) -> bool:
     return False
 
 
+# Day 24: deploy gate — block when current report regresses > REGRESSION_PP
+# percentage points vs the last passing baseline. Compares aligned metrics
+# only (e.g. ignores citation precision when n=0).
+REGRESSION_PP = 2.0
+
+
+def fail_on_regression(current: dict, baseline_path: Path | None) -> bool:
+    if baseline_path is None or not baseline_path.exists():
+        logger.info("no baseline at %s — skipping regression check", baseline_path)
+        return False
+    try:
+        baseline = json.loads(baseline_path.read_text())
+    except json.JSONDecodeError:
+        logger.warning("baseline %s is malformed — skipping regression check", baseline_path)
+        return False
+
+    misses: list[str] = []
+
+    def _diff(label: str, base: float, cur: float) -> None:
+        delta_pp = (cur - base) * 100
+        if delta_pp < -REGRESSION_PP:
+            misses.append(
+                f"{label}: {cur:.3f} vs baseline {base:.3f} ({delta_pp:+.2f}pp, threshold -{REGRESSION_PP}pp)"
+            )
+
+    if current["retrieval"]["n"] and baseline.get("retrieval", {}).get("n"):
+        _diff(
+            "hit@5",
+            baseline["retrieval"]["hit_at_5"],
+            current["retrieval"]["hit_at_5"],
+        )
+    if current["citation"]["n"] and baseline.get("citation", {}).get("n"):
+        _diff(
+            "citation_precision",
+            baseline["citation"]["precision"],
+            current["citation"]["precision"],
+        )
+    if current["answer"]["n"] and baseline.get("answer", {}).get("n"):
+        _diff(
+            "faithfulness",
+            baseline["answer"]["mean_faithfulness"],
+            current["answer"]["mean_faithfulness"],
+        )
+
+    if misses:
+        logger.error("regression vs baseline: %s", "; ".join(misses))
+        return True
+    logger.info("no regression > %.1fpp vs baseline", REGRESSION_PP)
+    return False
+
+
 def main(argv: list[str]) -> int:
     p = argparse.ArgumentParser(description="ARIA eval CLI")
     p.add_argument("--dataset", required=True, help="path to golden_set.json")
     p.add_argument("--map", required=True, help="path to doc_id_by_path.json")
     p.add_argument("--user-id", required=True, help="test user UUID")
     p.add_argument("--out", required=True, help="report json output path")
+    p.add_argument(
+        "--baseline",
+        default=None,
+        help="path to last green report (for regression deploy-gate, Day 24)",
+    )
     p.add_argument("--no-fail", action="store_true",
                    help="always exit 0 (for first-run / shadowing)")
     args = p.parse_args(argv)
@@ -110,7 +166,11 @@ def main(argv: list[str]) -> int:
 
     if args.no_fail:
         return 0
-    return 1 if fail_on_target_miss(report) else 0
+
+    target_miss = fail_on_target_miss(report)
+    baseline_path = Path(args.baseline) if args.baseline else None
+    regression = fail_on_regression(report, baseline_path)
+    return 1 if (target_miss or regression) else 0
 
 
 if __name__ == "__main__":

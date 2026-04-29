@@ -3,16 +3,16 @@
 - **Date**: 2026-04-28
 - **Status**: Accepted
 - **Deciders**: Hemant
-- **Supersedes**: PLAN.md (proposal), `build plan A.md` (interim)
+- **Supersedes**: earlier `PLAN.md` and `build plan A.md` drafts (deleted; superseded by `build plan A2.md`)
 
 ## Context
 
 ARIA is a multilingual AI reader for books and PDFs with precise citations and native-quality Indic TTS. v1 must be free at < 50 DAU, license-clean, and upgradeable as users / money arrive.
 
-Two earlier plans had blocking issues:
+Two earlier plans had blocking issues (both deleted from the repo as of Day 26 — git history retains them):
 
-- **PLAN.md** chose PyMuPDF (AGPL-3.0 — conflicts with our Apache-2.0 promise) and free Gemini API for everything (free Gemini ToS allows training on inputs — conflicts with the "no training on user data" promise).
-- **build plan A.md** fixed those two but missed 16 production-lifecycle items (idempotency, prompt versioning, DR, capacity planning, i18n, a11y, etc.).
+- **PLAN.md (initial)** chose PyMuPDF (AGPL-3.0 — conflicts with our Apache-2.0 promise) and free Gemini API for everything (free Gemini ToS allows training on inputs — conflicts with the "no training on user data" promise).
+- **build plan A.md (interim)** fixed those two but missed 16 production-lifecycle items (idempotency, prompt versioning, DR, capacity planning, i18n, a11y, etc.).
 
 `build plan A2.md` resolves both by locking the stack below and addressing all 27 lifecycle items.
 
@@ -77,5 +77,4 @@ Two earlier plans had blocking issues:
 ## References
 
 - [build plan A2.md](../../build%20plan%20A2.md) §3 (locked stack), §0 (delta vs A), §15 (CI license guard).
-- [build plan A.md](../../build%20plan%20A.md) §0 (audit fixes vs PLAN.md).
-- [PLAN.md](../../PLAN.md) (original, retained for history).
+- Earlier drafts (`PLAN.md`, `build plan A.md`) — deleted Day 26; recoverable via `git log -- PLAN.md "build plan A.md"`.

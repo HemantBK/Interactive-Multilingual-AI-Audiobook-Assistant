@@ -2,10 +2,12 @@ import { type FormEvent, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ChatPanel } from './components/Chat/ChatPanel';
+import { ConsentBanner } from './components/Common/ConsentBanner';
 import { ErrorBoundary } from './components/Common/ErrorBoundary';
 import { LoadingState } from './components/Common/LoadingState';
 import { DocumentList } from './components/Documents/DocumentList';
 import { DocumentViewer } from './components/Document/DocumentViewer';
+import { Footer } from './components/Layout/Footer';
 import { Dropzone } from './components/Upload/Dropzone';
 import { useAuth } from './hooks/useAuth';
 import { useDocuments } from './hooks/useDocuments';
@@ -228,6 +230,8 @@ export default function App() {
           <SignInForm />
         )}
       </main>
+      <Footer accessToken={accessToken} onSignedOut={() => void signOut()} />
+      <ConsentBanner />
     </div>
   );
 }

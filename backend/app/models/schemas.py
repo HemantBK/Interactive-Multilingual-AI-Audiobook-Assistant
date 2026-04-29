@@ -72,6 +72,19 @@ class TranslateResponse(BaseModel):
     target_language: str
 
 
+# ---------- User self-service (Day 25) ----------
+
+
+class UserExport(BaseModel):
+    exported_at: str
+    user_id: str
+    email: str | None
+    documents: list[dict]
+    conversations: list[dict]
+    usage: list[dict]
+    audit_log: list[dict]
+
+
 # ---------- TTS ----------
 
 

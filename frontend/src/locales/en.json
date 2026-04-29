@@ -66,6 +66,29 @@
       "cached": "from cache"
     }
   },
+  "footer": {
+    "legalNav": "Legal links",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "dmca": "DMCA"
+  },
+  "account": {
+    "exportLink": "Export my data",
+    "exporting": "Exporting…",
+    "exportDone": "Your data export was downloaded.",
+    "exportFailed": "Export failed ({{status}}). Try again or contact support.",
+    "deleteLink": "Delete my account",
+    "deleting": "Deleting…",
+    "deleteConfirm": "This will erase your account and all data. This cannot be undone. Continue?",
+    "deleteDone": "Account deleted. You're being signed out.",
+    "deleteFailed": "Delete failed ({{status}}). Some data may remain. Email support."
+  },
+  "consent": {
+    "regionLabel": "Analytics consent",
+    "message": "We collect anonymous usage events to improve ARIA. No personal data, no third-party ads. Your call.",
+    "accept": "Allow analytics",
+    "decline": "Decline"
+  },
   "audio": {
     "play": "Narrate",
     "busy": "Loading audio…",

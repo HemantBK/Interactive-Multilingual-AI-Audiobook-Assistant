@@ -84,6 +84,20 @@ jobs:
           npm install
           npm run typecheck
 
+  lint-frontend:
+    name: Lint + format (eslint + prettier)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - working-directory: frontend
+        run: |
+          npm install
+          npm run lint
+          npm run format:check
+
   no-client-side-ai:
     name: Frontend AI-keys guard (Day 20)
     runs-on: ubuntu-latest
@@ -231,6 +245,33 @@ jobs:
           format: spdx-json
           artifact-name: aria-sbom.spdx.json
           upload-artifact: true
+
+  pip-audit:
+    name: pip-audit (Python CVEs)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pip-audit==2.7.3
+      - run: pip-audit -r backend/requirements.txt
+      - run: pip-audit -r backend/requirements-dev.txt
+
+  npm-audit:
+    name: npm audit (high+ severity blocks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - working-directory: frontend
+        run: |
+          npm install --no-audit
+          # --audit-level=high makes only high / critical CVEs fail the build.
+          # Day 26 review: tune to 'moderate' before public launch (Day 28).
+          npm audit --audit-level=high
 
   e2e-and-a11y:
     name: E2E + a11y (Playwright + axe-core)

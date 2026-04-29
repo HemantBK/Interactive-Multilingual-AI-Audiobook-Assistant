@@ -50,6 +50,8 @@ def test_known_endpoints_are_declared() -> None:
         "/translate",
         "/tts",
         "/voices",
+        "/user/me/export",
+        "/user/me",
     }
     missing = expected - paths
     assert not missing, f"missing endpoints in OpenAPI: {missing}"

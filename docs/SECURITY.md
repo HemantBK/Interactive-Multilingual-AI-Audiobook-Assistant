@@ -19,6 +19,12 @@
 
 Email `hemantkumar.bk@gmail.com` with subject `SECURITY`. Do not open a public issue. We aim to respond within 72 hours.
 
+## Periodic reviews
+
+- **Day 26 (pre-private-beta)** — full pass at [day-26-review.md](security/day-26-review.md). Threat-model walk, CSP audit, audit results.
+- **RLS verification runbook** — [rls-checklist.md](security/rls-checklist.md). 9 manual tests with two accounts. Run before every public deploy and after any user-facing migration.
+- **Quarterly** — repeat the Day 26 review pass; update CVE pins; tighten CSP by one notch.
+
 ## Supply chain
 
 - `pip-audit` + `npm audit` run in CI on every PR (Week 4)
